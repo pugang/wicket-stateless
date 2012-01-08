@@ -1,6 +1,7 @@
 .classpath
 .project
 target
+.gradle
 .settings
 bin
 MANIFEST.MF
@@ -8,3 +9,5 @@ CVS
 .svn
 .cvsignore
 *.log
+
+.DS_Store
