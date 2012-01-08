@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+targetCompatibility = '1.6'
+sourceCompatibility = '1.6'
+
+repositories {
+	mavenCentral()
+	maven {		
+		url "https://repository.apache.org/content/repositories/snapshots/"
+	}
+}
+
+// never include this modules in build
+configurations {
+	all*.exclude module: 'commons-logging'
+	all*.exclude group: 'cglib', module: 'cglib-nodep'
+	all*.exclude group: 'log4j', module: 'log4j'
+}
+
+libz = [
+	wicket: '6.0-SNAPSHOT', // custom Wicket build @ https://github.com/robmcguinness/wicket
+]
+
+dependencies {
+	// wicket
+	compile	'org.apache.wicket:wicket:'+libz.wicket
+}
