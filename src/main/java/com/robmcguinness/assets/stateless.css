@@ -12,8 +12,8 @@ section {
 }
 
 .session {
-    width: 200px;
-    float:right;
+    width: 100px;
+    float: right;
     margin-top: 4px;
     text-align: center;
 }

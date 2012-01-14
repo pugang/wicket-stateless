@@ -18,6 +18,7 @@ public class WicketApplication extends WebApplication {
 	@Override
 	protected void init() {
 		getDebugSettings().setDevelopmentUtilitiesEnabled(true);
+		getMarkupSettings().setStripWicketTags(true);
 		getComponentPreOnBeforeRenderListeners().add(new StatelessChecker());
 	}
 

@@ -34,10 +34,10 @@ public class SessionModel extends AbstractReadOnlyModel<String> {
 		final String msg;
 		String sessionId = Application.get().getSessionStore().getSessionId(RequestCycle.get().getRequest(), false);
 		if (sessionId == null) {
-			msg = "stateless mode";
+			msg = "stateless";
 			stateless = true;
 		} else {
-			msg = "statefull mode";
+			msg = "statefull";
 			stateless = false;
 		}
 		return msg;

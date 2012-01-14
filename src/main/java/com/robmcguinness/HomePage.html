@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:wicket>>
+<html lang="en" xmlns:wicket>
 <head>
     <meta charset="utf-8">
     <title>Wicket: Stateless Ajax</title>
-    <meta name="description" content="examples of stateles ajax components">
+    <meta name="description" content="examples of stateles ajax components based on work by ji">
     <meta name="author" content="@robmcguinness">
 </head>
 <body >
@@ -16,7 +16,7 @@
                 <li><a href="http://wicket.apache.org/">wicket</a></li>
             </ul>
             <span></span>
-            <div class="alert-message success session disabled" wicket:id="sessionLabel">[session exists?]</div>
+            <div class="alert-message success session" rel="twipsy" data-content="indicates if application is stateless or stateful" data-trigger="hover" data-placement="below" wicket:id="sessionLabel">[session exists?]</div>
         </div>
     </div>
 </div>
