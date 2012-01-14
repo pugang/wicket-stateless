@@ -3,8 +3,10 @@ package com.robmcguinness;
 import java.util.Arrays;
 
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.devutils.stateless.StatelessComponent;
+import org.apache.wicket.event.Broadcast;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
@@ -19,6 +21,8 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.resource.header.CssHeaderItem;
 import org.apache.wicket.util.string.StringValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.robmcguinness.models.SessionModel;
 import com.robmcguinness.stateless.StatelessAjaxFallbackLink;
@@ -31,6 +35,8 @@ import com.robmcguinness.stateless.StatelessLink;
  */
 @StatelessComponent
 public class HomePage extends WebPage {
+
+	private static final Logger logger = LoggerFactory.getLogger(HomePage.class);
 
 	/** The Constant COUNTER_PARAM. */
 	private static final String COUNTER_PARAM = "counter";
@@ -58,7 +64,12 @@ public class HomePage extends WebPage {
 				return counter;
 			}
 
-		});
+		}) {
+			@Override
+			public void onEvent(IEvent<?> event) {
+				addAjaxCounterComponent(event, this);
+			}
+		};
 
 		counterLabel.setMarkupId(counterLabel.getId()); // Required to make stateless Ajax work
 		counterLabel.setOutputMarkupId(true);
@@ -69,10 +80,16 @@ public class HomePage extends WebPage {
 			public void onClick(final AjaxRequestTarget target) {
 				if (target != null) {
 					Integer counter = (Integer) counterLabel.getDefaultModelObject();
+					logger.debug("pageParamters {}", getPageParameters());
 					updateCounter(getPageParameters(), counter, true);
 					target.add(counterLabel);
-					target.add(this);
+					target.add(minusLink);
 				}
+			}
+
+			@Override
+			public void onEvent(IEvent<?> event) {
+				addAjaxCounterComponent(event, this);
 			}
 		};
 
@@ -82,10 +99,16 @@ public class HomePage extends WebPage {
 			public void onClick(final AjaxRequestTarget target) {
 				if (target != null) {
 					Integer counter = (Integer) counterLabel.getDefaultModelObject();
+					logger.debug("pageParamters {}", getPageParameters());
 					updateCounter(getPageParameters(), counter, false);
 					target.add(counterLabel);
-					target.add(this);
+					target.add(plusLink);
 				}
+			}
+
+			@Override
+			public void onEvent(IEvent<?> event) {
+				addAjaxCounterComponent(event, this);
 			}
 		};
 
@@ -99,7 +122,7 @@ public class HomePage extends WebPage {
 
 			@Override
 			protected void onSubmit() {
-				System.out.format("clicked sumbit: a = [%s], b = [%s]%n", getParameter(parameters, "a"), getParameter(parameters, "b"));
+				logger.debug("pageParamters {}", getPageParameters());
 			}
 
 		};
@@ -117,7 +140,7 @@ public class HomePage extends WebPage {
 			@Override
 			protected void onUpdate(final AjaxRequestTarget target) {
 				final String value = c.getModelObject();
-				System.out.println("value[" + value + "]");
+				logger.debug("pageParamters {}", getPageParameters());
 			}
 		});
 		c.setMarkupId("c");
@@ -185,10 +208,45 @@ public class HomePage extends WebPage {
 	protected final void updateCounter(final PageParameters pageParameters, int counter, boolean add) {
 		pageParameters.set(COUNTER_PARAM, Integer.toString(add ? counter + 1 : counter - 1));
 
+		send(getPage(), Broadcast.BREADTH, new CounterPayload(pageParameters, counter, add));
 		if (add)
 			minusLink.setPageParameters(pageParameters);
 		else
 			plusLink.setPageParameters(pageParameters);
+
+	}
+
+	private void addAjaxCounterComponent(IEvent<?> event, Component component) {
+		if (event.getPayload() instanceof CounterPayload) {
+			AjaxRequestTarget target = AjaxRequestTarget.get();
+			if (AjaxRequestTarget.get() != null) {
+				target.add(component);
+			}
+		}
+	}
+
+	public static class CounterPayload {
+		private int counter;
+		private PageParameters params;
+		private boolean add;
+
+		public CounterPayload(PageParameters params, int counter, boolean add) {
+			this.counter = counter;
+			this.params = params;
+			this.add = add;
+		}
+
+		public int getCounter() {
+			return counter;
+		}
+
+		public PageParameters getParams() {
+			return params;
+		}
+
+		public boolean isAdd() {
+			return add;
+		}
 
 	}
 }
