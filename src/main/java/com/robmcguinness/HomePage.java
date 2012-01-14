@@ -24,6 +24,7 @@ import org.apache.wicket.util.string.StringValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.robmcguinness.assets.Assets;
 import com.robmcguinness.models.SessionModel;
 import com.robmcguinness.stateless.StatelessAjaxFallbackLink;
 import com.robmcguinness.stateless.StatelessAjaxFormComponentUpdatingBehavior;
@@ -158,7 +159,8 @@ public class HomePage extends WebPage {
 	 */
 	@Override
 	public void renderHead(IHeaderResponse response) {
-		response.render(CssHeaderItem.forReference(new CssResourceReference(HomePage.class, "bootstrap.min.css")));
+		response.render(CssHeaderItem.forReference(new CssResourceReference(Assets.class, "bootstrap.min.css")));
+		response.render(CssHeaderItem.forReference(new CssResourceReference(Assets.class, "stateless.css")));
 
 	}
 

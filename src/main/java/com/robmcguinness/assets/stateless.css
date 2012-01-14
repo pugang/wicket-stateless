@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin-top: 20px;
+}
+
+section {
+    margin-bottom: 60px;
+}
+
+.session {
+    width: 200px;
+    float:right;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.topbar .alert-message {
+    margin-bottom: 0px;
+}
+
+.theForm {
+    width: 300px;
+}
