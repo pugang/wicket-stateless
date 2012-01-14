@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket>>
+<head>
+    <meta charset="utf-8">
+    <title>Wicket: Stateless Ajax</title>
+    <meta name="description" content="examples of stateles ajax components">
+    <meta name="author" content="@robmcguinness">
+</head>
+<body >
+<div class="topbar">
+    <div class="fill">
+        <div class="container">
+            <h3><a href="https://github.com/robmcguinness/wicket-stateless">Wicket Stateless</a></h3>
+            <ul>
+                <li><a href="https://github.com/jolira/wicket-stateless">jolira</a></li>
+                <li><a href="http://wicket.apache.org/">wicket</a></li>
+            </ul>
+            <span></span>
+            <div class="alert-message success session disabled" wicket:id="sessionLabel">[session exists?]</div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="hero-unit">
+        <h1 wicket:id="counterLabel">[0]</h1>
+        <p><code>StatelessAjaxFallbackLink</code> this link uses ajax when it is available, and a regular wicket roundtrip when ajax or javascript are not available.</p>
+        <p>
+            <a class="btn primary large" wicket:id="plusLink">plus</a>
+            <a class="btn danger large" wicket:id="minusLink">minus</a>
+        </p>
+    </div>
+  <div class="row">
+      <div class="span5">
+        [target]
+      </div>
+
+      <div class="span11">
+        <section id="stateless-form">
+            <div class="page-header">
+                <h3>Stateless Form Submit</h3>
+            </div>
+            <form class="theForm" wicket:id="inputForm" method="get">
+                <fieldset>
+                    <legend>Stateless Ajax Submit</legend>
+                    <div class="clearFix">
+                        <label for="a">a:</label>
+                        <div class="input">
+                            <input class="xlarge" wicket:id="a" id="a" type="text" size="15"/>
+                        </div>
+                    </div>
+                    <div class="clearFix">
+                        <label for="b">b:</label>
+                        <div class="input">
+                            <input class="xlarge" wicket:id="b" id="b" type="text" size="15"/><br/>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <input type="submit" class="btn primary" value="Submit" />
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <section id="stateless-form-update">
+            <div class="page-header">
+                <h3>Stateless Ajax Form Update Behavior</h3>
+            </div>
+            <select wicket:id="c">
+                <option>1</option>
+            </select>
+        </section>
+      </div>
+  </div>
+</div>
+</body>
+</html>
