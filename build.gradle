@@ -8,7 +8,7 @@ sourceCompatibility = '1.6'
 repositories {
 	mavenLocal()
 	mavenCentral()
-	maven {		
+	maven {
 		url "https://repository.apache.org/content/repositories/snapshots/"
 	}
 }
@@ -21,9 +21,10 @@ configurations {
 }
 
 libz = [
-	wicket: '6.0-SNAPSHOT', // custom Wicket build @ https://github.com/robmcguinness/wicket
+	wicket: '6.0-SNAPSHOT',
 	jetty: '7.4.2.v20110526',
-	junit: '4.8.2'
+	junit: '4.8.2',
+	logback: '1.0.0'
 ]
 
 dependencies {
@@ -33,6 +34,9 @@ dependencies {
 
 	// jetty
 	compile "org.eclipse.jetty.aggregate:jetty-all-server:"+libz.jetty
+
+	// logging
+	compile 'ch.qos.logback:logback-core:'+libz.logback
 
 	// test
 	testCompile 'junit:junit:'+libz.junit
