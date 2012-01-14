@@ -1,10 +1,12 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'war'
 
 targetCompatibility = '1.6'
 sourceCompatibility = '1.6'
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 	maven {		
 		url "https://repository.apache.org/content/repositories/snapshots/"
@@ -20,9 +22,26 @@ configurations {
 
 libz = [
 	wicket: '6.0-SNAPSHOT', // custom Wicket build @ https://github.com/robmcguinness/wicket
+	jetty: '7.4.2.v20110526',
+	junit: '4.8.2'
 ]
 
 dependencies {
 	// wicket
-	compile	'org.apache.wicket:wicket:'+libz.wicket
+	compile	'org.apache.wicket:wicket:'+libz.wicket,
+			'org.apache.wicket:wicket-devutils:'+libz.wicket
+
+	// jetty
+	compile "org.eclipse.jetty.aggregate:jetty-all-server:"+libz.jetty
+
+	// test
+	testCompile 'junit:junit:'+libz.junit
+}
+
+task createMavenProjectStructure << {
+    logger.info("Creating Maven Project Structure\n")
+
+    webAppDir.mkdirs()
+    sourceSets.all*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets.all*.resources.srcDirs*.each { it.mkdirs() }
 }
