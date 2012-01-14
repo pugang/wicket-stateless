@@ -8,6 +8,8 @@ import org.apache.wicket.request.Url;
 import org.apache.wicket.request.UrlEncoder;
 import org.apache.wicket.request.mapper.parameter.INamedParameters.NamedPair;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Centralize algorithms that are shared.
@@ -16,6 +18,8 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
  * 
  */
 final class StatelessEncoder {
+
+	private static final Logger logger = LoggerFactory.getLogger(StatelessEncoder.class);
 
 	/**
 	 * Merges the query parameters of the url with the named parameters from the {@link PageParameters}. The page parameters override the query parameters.
@@ -31,6 +35,8 @@ final class StatelessEncoder {
 		}
 
 		Charset charset = url.getCharset();
+
+		logger.debug("merging url[{}] with pageParameters[{}]", url.toString(), params);
 
 		Url mergedUrl = Url.parse(url.toString(), charset);
 
