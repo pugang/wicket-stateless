@@ -17,7 +17,6 @@
           <li><a href="https://github.com/jolira/wicket-stateless">jolira stateless</a></li>
           <li><a href="http://wicket.apache.org/">apache wicket</a></li>
         </ul>
-        <span></span>
         <div class="alert-message success session" rel="twipsy" data-content="indicates if application is stateless or stateful" data-trigger="hover" data-placement="below" wicket:id="sessionLabel">[session exists?]</div>
       </div>
     </div>
@@ -33,7 +32,7 @@
         this link uses ajax when it is available and a regular wicket roundtrip when ajax or javascript are not available.
       </p>
       <p>
-        <a class="btn primary large" wicket:id="plusLink">increment</a> <a class="btn danger large" wicket:id="minusLink">decrement</a>
+        <a class="btn primary large" wicket:id="plusLink">increment</a> <a class="btn info large" wicket:id="minusLink">decrement</a>
       </p>
     </div>
     <div class="content">
@@ -90,6 +89,18 @@
               </div>
             </fieldset>
           </div>
+        </div>
+
+        <div class="row">
+            <div class="span4">
+                <h2>Statefulness
+                    <code>=></code>
+                </h2>
+                <p>Go stateful by clicking the button on the right</p>
+            </div>
+            <div class="span10 center">
+                <p><a class="btn danger large" id="plusLink">Create Session</a></p>
+            </div>
         </div>
       </form>
     </div>

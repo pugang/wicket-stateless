@@ -72,3 +72,11 @@ h2 code {
 .formz .row {
     margin-bottom: 60px;
 }
+
+.center {
+    text-align: center;
+}
+
+.center a {
+    width: 100%;
+}

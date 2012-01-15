@@ -146,14 +146,14 @@ public class HomePage extends WebPage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				PageParameters params = target.getPageParameters();
-				logger.debug("pageParamters {}", getPageParameters());
+				logger.debug("pageParamters {}", params);
 
 			}
 
 			@Override
 			protected void onError(AjaxRequestTarget target, Form<?> form) {
 				PageParameters params = target.getPageParameters();
-				logger.debug("pageParamters {}", getPageParameters());
+				logger.debug("pageParamters {}", params);
 
 			}
 
