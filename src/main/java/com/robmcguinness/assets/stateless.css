@@ -11,6 +11,10 @@ section {
     margin-bottom: 60px;
 }
 
+fieldset legend {
+    font-size: 16.5px;
+}
+
 .container {
     width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 }
@@ -37,11 +41,6 @@ section {
 .content .span10 {
     margin-left: 0;
     padding-left: 19px;
-    border-left: 1px solid #eee;
-}
-
-.theForm {
-    width: 300px;
 }
 
 .container > footer {
@@ -51,4 +50,8 @@ section {
 .container > footer a {
     display: block;
     text-align: center;
+}
+
+.formz fieldset > div {
+    margin-bottom: 10px;
 }
