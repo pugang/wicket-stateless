@@ -2,6 +2,7 @@ package com.robmcguinness;
 
 import java.util.Arrays;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -54,6 +55,14 @@ public class HomePage extends WebPage {
 	 * @param parameters the parameters
 	 */
 	public HomePage(final PageParameters parameters) {
+
+		add(new Label("version", new AbstractReadOnlyModel<String>() {
+
+			@Override
+			public String getObject() {
+				return Application.get().getFrameworkSettings().getVersion();
+			}
+		}));
 
 		add(sessionLabel = new Label("sessionLabel", new SessionModel()));
 		sessionLabel.setMarkupId("sessionLabel");

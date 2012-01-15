@@ -26,6 +26,14 @@ section {
     margin-bottom: 0px;
 }
 
+.topbar h3 small {
+    font-size: 10px;
+}
+
+.hero-unit code {
+    font-size: 14px;
+}
+
 .content .span10 {
     margin-left: 0;
     padding-left: 19px;
