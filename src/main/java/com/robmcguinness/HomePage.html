@@ -23,6 +23,9 @@
     </div>
   </div>
   <div class="container">
+    <div class="page-header">
+      <h1>Examples</h1>
+    </div>
     <div class="hero-unit">
       <h1 wicket:id="counterLabel">[0]</h1>
       <p>
@@ -35,15 +38,17 @@
     </div>
     <div class="content">
       <form class="formz" wicket:id="inputForm" method="get">
-
-        <div class="page-header">
-           <h1>Forms</h1>
-        </div>
         <div class="row">
-          <div class="span4">Results</div>
+          <div class="span4">
+            <h2>
+              Submit
+              <code>=></code>
+            </h2>
+            <p>Enter your first and last name and view the results here. Hit clear to reset the page parameters.</p>
+          </div>
           <div class="span10">
             <fieldset>
-              <legend>StatelessAjaxButton</legend>
+              <legend><a href="https://github.com/robmcguinness/wicket-stateless/blob/master/src/main/java/com/robmcguinness/HomePage.java#L144">StatelessAjaxButton</a></legend>
               <div>
                 <label wicket:for="firstName">First Name:</label>
                 <div class="input">
@@ -64,23 +69,26 @@
           </div>
         </div>
 
-        <div class="page-header">
-            <h1>Other</h1>
-        </div>
         <div class="row">
-          <div class="span4">Other Results</div>
+          <div class="span4">
+            <h2>
+              Dropdowns
+              <code>=></code>
+            </h2>
+            <p>Select an item in the dropdown and the results will show here.</p>
+          </div>
           <div class="span10">
             <fieldset>
-            <legend>StatelessAjaxFormComponentUpdatingBehavior</legend>
-            <div class="clearFix">
-              <label wicket:for="preference">Preference:</label>
-              <div class="input">
-                <select wicket:id="preference">
-                  <option>1</option>
-                </select>
+              <legend><a href="https://github.com/robmcguinness/wicket-stateless/blob/master/src/main/java/com/robmcguinness/HomePage.java#L170">StatelessAjaxFormComponentUpdatingBehavior</a></legend>
+              <div class="clearFix">
+                <label wicket:for="preference">Preference:</label>
+                <div class="input">
+                  <select wicket:id="preference">
+                    <option>1</option>
+                  </select>
+                </div>
               </div>
-            </div>
-          </fieldset>
+            </fieldset>
           </div>
         </div>
       </form>
