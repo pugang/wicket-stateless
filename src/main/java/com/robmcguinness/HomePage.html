@@ -1,80 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:wicket>
 <head>
-    <meta charset="utf-8">
-    <title>Wicket: Stateless Ajax</title>
-    <meta name="description" content="examples of stateles ajax components based on work by ji">
-    <meta name="author" content="@robmcguinness">
+<meta charset="utf-8">
+<title>Wicket: Stateless Ajax</title>
+<meta name="description" content="examples of stateles ajax components based on work by ji">
+<meta name="author" content="@robmcguinness">
 </head>
-<body >
-<div class="topbar">
+<body>
+  <div class="topbar">
     <div class="fill">
-        <div class="container">
-            <h3><a href="https://github.com/robmcguinness/wicket-stateless">Wicket Stateless <small wicket:id="version">[version]</small></a></h3>
-            <ul>
-                <li><a href="https://github.com/jolira/wicket-stateless">jolira stateless</a></li>
-                <li><a href="http://wicket.apache.org/">apache wicket</a></li>
-            </ul>
-            <span></span>
-            <div class="alert-message success session" rel="twipsy" data-content="indicates if application is stateless or stateful" data-trigger="hover" data-placement="below" wicket:id="sessionLabel">[session exists?]</div>
-        </div>
+      <div class="container">
+        <h3>
+          <a href="https://github.com/robmcguinness/wicket-stateless">Wicket Stateless <small wicket:id="version">[version]</small></a>
+        </h3>
+        <ul>
+          <li><a href="https://github.com/jolira/wicket-stateless">jolira stateless</a></li>
+          <li><a href="http://wicket.apache.org/">apache wicket</a></li>
+        </ul>
+        <span></span>
+        <div class="alert-message success session" rel="twipsy" data-content="indicates if application is stateless or stateful" data-trigger="hover" data-placement="below" wicket:id="sessionLabel">[session exists?]</div>
+      </div>
     </div>
-</div>
-<div class="container">
+  </div>
+  <div class="container">
     <div class="hero-unit">
-        <h1 wicket:id="counterLabel">[0]</h1>
-        <p><code>StatelessAjaxFallbackLink</code> this link uses ajax when it is available and a regular wicket roundtrip when ajax or javascript are not available.</p>
-        <p>
-            <a class="btn primary large" wicket:id="plusLink">increment</a>
-            <a class="btn danger large" wicket:id="minusLink">decrement</a>
-        </p>
+      <h1 wicket:id="counterLabel">[0]</h1>
+      <p>
+        <code>StatelessAjaxFallbackLink</code>
+        this link uses ajax when it is available and a regular wicket roundtrip when ajax or javascript are not available.
+      </p>
+      <p>
+        <a class="btn primary large" wicket:id="plusLink">increment</a> <a class="btn danger large" wicket:id="minusLink">decrement</a>
+      </p>
     </div>
     <div class="content">
-    <div class="row">
-        <div class="span4">
-            Results
+      <form class="formz" wicket:id="inputForm" method="get">
+
+        <div class="page-header">
+           <h1>Forms</h1>
+        </div>
+        <div class="row">
+          <div class="span4">Results</div>
+          <div class="span10">
+            <fieldset>
+              <legend>StatelessAjaxButton</legend>
+              <div>
+                <label wicket:for="firstName">First Name:</label>
+                <div class="input">
+                  <input wicket:id="firstName" name="firstName" type="text" size="15" />
+                </div>
+              </div>
+              <div>
+                <label wicket:for="lastName">Last Name:</label>
+                <div class="input">
+                  <input wicket:id="lastName" name="lastName" type="text" size="15" />
+                </div>
+              </div>
+              <div class="actions">
+                <input wicket:id="inputFormButton" type="submit" class="btn primary" value="Submit" />
+                <button type="reset" class="btn">Clear</button>
+              </div>
+            </fieldset>
+          </div>
         </div>
 
-        <div class="span10">
-            <section id="stateless-form">
-                <div class="page-header">
-                    <h3>Stateless Form Submit</h3>
-                </div>
-                <form class="theForm" wicket:id="inputForm" method="get">
-                    <fieldset>
-                        <legend>Stateless Ajax Submit</legend>
-                        <div class="clearFix">
-                            <label for="a">a:</label>
-                            <div class="input">
-                                <input class="xlarge" wicket:id="a" id="a" type="text" size="15"/>
-                            </div>
-                        </div>
-                        <div class="clearFix">
-                        <label for="b">b:</label>
-                        <div class="input">
-                            <input class="xlarge" wicket:id="b" id="b" type="text" size="15"/><br/>
-                        </div>
-                        </div>
-                        <div class="actions">
-                            <input type="submit" class="btn primary" value="Submit" />
-                        </div>
-                    </fieldset>
-                </form>
-            </section>
-            <section id="stateless-form-update">
-                <div class="page-header">
-                    <h3>Stateless Ajax Form Update Behavior</h3>
-                </div>
-                <select wicket:id="c">
-                    <option>1</option>
-                </select>
-            </section>
+        <div class="page-header">
+            <h1>Other</h1>
         </div>
-    </div>
+        <div class="row">
+          <div class="span4">Other Results</div>
+          <div class="span10">
+            <fieldset>
+            <legend>StatelessAjaxFormComponentUpdatingBehavior</legend>
+            <div class="clearFix">
+              <label wicket:for="preference">Preference:</label>
+              <div class="input">
+                <select wicket:id="preference">
+                  <option>1</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          </div>
+        </div>
+      </form>
     </div>
     <footer>
-        <a href="https://twitter.com/#!/robmcguinness">@robmcguinness</a>
+      <a href="https://twitter.com/#!/robmcguinness">@robmcguinness</a>
     </footer>
-</div>
+  </div>
 </body>
 </html>

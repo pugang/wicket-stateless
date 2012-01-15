@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxRequestAttributes;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.devutils.stateless.StatelessComponent;
 import org.apache.wicket.event.Broadcast;
@@ -29,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.robmcguinness.assets.Assets;
 import com.robmcguinness.models.SessionModel;
+import com.robmcguinness.stateless.StatelessAjaxButton;
 import com.robmcguinness.stateless.StatelessAjaxFallbackLink;
 import com.robmcguinness.stateless.StatelessAjaxFormComponentUpdatingBehavior;
 import com.robmcguinness.stateless.StatelessLink;
@@ -66,6 +68,7 @@ public class HomePage extends WebPage {
 
 		add(sessionLabel = new Label("sessionLabel", new SessionModel()));
 		sessionLabel.setMarkupId("sessionLabel");
+		initSessionLabelCSS();
 
 		final Label counterLabel = new Label("counterLabel", new AbstractReadOnlyModel<Integer>() {
 
@@ -128,21 +131,43 @@ public class HomePage extends WebPage {
 		add(minusLink);
 		add(counterLabel);
 
-		final String _a = getParameter(parameters, "a");
-		final String _b = getParameter(parameters, "b");
-		final Form<String> form = new StatelessForm<String>("inputForm") {
+		final String _firstName = getParameter(parameters, "firstName");
+		final String _lastName = getParameter(parameters, "lastName");
+
+		final TextField<String> firstName = new TextField<String>("firstName", new Model<String>(_firstName));
+		firstName.setMarkupId(firstName.getId());
+		final TextField<String> lastName = new TextField<String>("lastName", new Model<String>(_lastName));
+		lastName.setMarkupId(lastName.getId());
+
+		final Form<String> form = new StatelessForm<String>("inputForm");
+		form.setMarkupId(form.getId());
+		form.add(new StatelessAjaxButton("inputFormButton", form) {
 
 			@Override
-			protected void onSubmit() {
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+				PageParameters params = target.getPageParameters();
 				logger.debug("pageParamters {}", getPageParameters());
+
 			}
 
-		};
-		final TextField<String> a = new TextField<String>("a", new Model<String>(_a));
-		final TextField<String> b = new TextField<String>("b", new Model<String>(_b));
-		final DropDownChoice<String> c = new DropDownChoice<String>("c", new Model<String>("2"), Arrays.asList(new String[] { "1", "2", "3" }));
+			@Override
+			protected void onError(AjaxRequestTarget target, Form<?> form) {
+				PageParameters params = target.getPageParameters();
+				logger.debug("pageParamters {}", getPageParameters());
 
-		c.add(new StatelessAjaxFormComponentUpdatingBehavior("onchange") {
+			}
+
+			@Override
+			protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
+				attributes.getDynamicExtraParameters().add("return Wicket.Form.serializeElement('" + firstName.getMarkupId() + "')");
+				attributes.getDynamicExtraParameters().add("return Wicket.Form.serializeElement('" + lastName.getMarkupId() + "')");
+
+			}
+
+		});
+
+		final DropDownChoice<String> preference = new DropDownChoice<String>("preference", new Model<String>("1"), Arrays.asList(new String[] { "Tebowing", "Gronking", "Other" }));
+		preference.add(new StatelessAjaxFormComponentUpdatingBehavior("onchange") {
 
 			@Override
 			protected PageParameters getPageParameters() {
@@ -151,16 +176,16 @@ public class HomePage extends WebPage {
 
 			@Override
 			protected void onUpdate(final AjaxRequestTarget target) {
-				final String value = c.getModelObject();
+				final String value = preference.getModelObject();
 				logger.debug("pageParamters {}", getPageParameters());
 			}
 		});
-		c.setMarkupId("c");
-		form.add(a);
-		form.add(b);
+		preference.setMarkupId("preference");
+		form.add(firstName);
+		form.add(preference);
+		form.add(lastName);
 		add(form);
 
-		add(c);
 	}
 
 	/*
@@ -189,13 +214,17 @@ public class HomePage extends WebPage {
 	public void onEvent(IEvent<?> event) {
 		// update the session label on every ajax request
 		if (event.getPayload() instanceof AjaxRequestTarget) {
-			SessionModel model = (SessionModel) sessionLabel.getDefaultModel();
-			if (model.isStateless()) {
-				sessionLabel.add(new AttributeModifier("class", new Model<String>("alert-message success session")));
-			} else {
-				sessionLabel.add(new AttributeModifier("class", new Model<String>("alert-message error session")));
-			}
+			initSessionLabelCSS();
 			((AjaxRequestTarget) event.getPayload()).add(sessionLabel);
+		}
+	}
+
+	private void initSessionLabelCSS() {
+		SessionModel model = (SessionModel) sessionLabel.getDefaultModel();
+		if (model.isStateless()) {
+			sessionLabel.add(new AttributeModifier("class", new Model<String>("alert-message success session")));
+		} else {
+			sessionLabel.add(new AttributeModifier("class", new Model<String>("alert-message error session")));
 		}
 	}
 
