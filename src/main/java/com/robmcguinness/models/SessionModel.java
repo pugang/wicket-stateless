@@ -21,7 +21,7 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.request.cycle.RequestCycle;
 
 /**
- * Model that displays whether a session was created yet, and if it was, prints the session id.
+ * Model that displays whether if the application is stateless or stateful.
  * 
  * @author Eelco Hillenius
  */
