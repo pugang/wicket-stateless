@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.robmcguinness.stateless.StatelessAjaxFallbackLink;
 import com.robmcguinness.stateless.StatelessLabel;
 import com.robmcguinness.stateless.StatelessLink;
+import com.robmcguinness.stateless.utils.Javascript;
 import com.robmcguinness.stateless.utils.Parameters;
 
 /**
@@ -50,6 +51,7 @@ public class Example1Panel extends Panel {
 					updateCounter(getPageParameters(), true);
 				}
 			}
+			
 
 			@Override
 			public void onEvent(IEvent<?> event) {
@@ -109,8 +111,12 @@ public class Example1Panel extends Panel {
 
 		@Override
 		public void onEvent(IEvent<?> event) {
-			if (event.getPayload() instanceof CounterPayload) {
-				updateAjaxCounterComponent(this);
+			if (event.getPayload() instanceof CounterPayload) {	
+				AjaxRequestTarget target = AjaxRequestTarget.get();
+				if(target != null) {
+					updateAjaxCounterComponent(this);
+					target.appendJavaScript(Javascript.highlight(this));
+				}
 			}
 		}
 
@@ -134,8 +140,8 @@ public class Example1Panel extends Panel {
 
 	private void updateAjaxCounterComponent(Component component) {
 		AjaxRequestTarget target = AjaxRequestTarget.get();
-		if (AjaxRequestTarget.get() != null) {
-			target.add(component);
+		if (target != null) {
+			target.add(component);			
 		}
 	}
 

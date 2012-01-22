@@ -88,3 +88,19 @@ fieldset legend {
     line-height: 20px;
     margin-bottom: 2px;
 }
+
+.highlight {
+    -webkit-animation: target-fade 3s 1;
+    -moz-animation: target-fade 3s 1;
+    border-radius: 5px;
+    padding: 1px;
+}
+
+@-webkit-keyframes target-fade {
+    0% { background-color: rgba(255,241,194,1); }
+    100% { background-color: rgba(0,0,0,0); }
+}
+@-moz-keyframes target-fade {
+    0% { background-color: rgba(255,181,21,1); }
+    100% { background-color: rgba(0,0,0,0); }
+}
