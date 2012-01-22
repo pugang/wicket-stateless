@@ -16,9 +16,7 @@ public abstract class StatelessAjaxEventBehavior extends AjaxEventBehavior {
     }
 
     /**
-     * Adding parameters the generated URL. This preferably would be handled by
-     * the {@link StatelessWebRequestCodingStrategy}, but the frameworks
-     * currently is lacking a way to pass the parameters to that class.
+     * Adding parameters the generated URL.
      *
      *
      * @see AbstractAjaxBehavior#getCallbackUrl(boolean)
