@@ -36,7 +36,7 @@ public abstract class StatelessAjaxButton extends Button {
 		this.form = form;
 		this.params = params;
 
-		add(new StatlessAjaxFormSubmitBehavior(form, "click") {
+		add(new StatelessAjaxFormSubmitBehavior(form, "click") {
 
 			@Override
 			protected PageParameters getPageParameters() {

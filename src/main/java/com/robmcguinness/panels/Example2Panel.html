@@ -1,0 +1,59 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+  <form class="formz" wicket:id="inputForm" method="get">
+    <div class="row">
+      <div class="span4">
+        <h2>
+          <a href="https://github.com/robmcguinness/wicket-stateless/blob/master/src/main/java/com/robmcguinness/HomePage.java#L144">StatelessAjaxButton</a>
+        </h2>
+        <p>Enter your first and last name and view the results here. Hit clear to reset the page parameters.</p>
+        <wicket:enclosure child="yourName">
+          <p>
+            Hello <span wicket:id="yourName">[your name here]</span>!
+          </p>
+        </wicket:enclosure>
+      </div>
+      <div class="span10">
+        <fieldset>
+          <legend></legend>
+          <div>
+            <label wicket:for="firstName">First Name:</label>
+            <div class="input">
+              <input wicket:id="firstName" name="firstName" type="text" size="15" />
+            </div>
+          </div>
+          <div>
+            <label wicket:for="lastName">Last Name:</label>
+            <div class="input">
+              <input wicket:id="lastName" name="lastName" type="text" size="15" />
+            </div>
+          </div>
+          <div class="actions">
+            <input wicket:id="inputFormButton" type="submit" class="btn primary" value="Submit" />
+            <button type="reset" class="btn">Clear</button>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span4">
+        <h2 class="wrapper">
+          <a href="https://github.com/robmcguinness/wicket-stateless/blob/master/src/main/java/com/robmcguinness/HomePage.java#L170">StatelessAjaxFormComponentUpdatingBehavior</a>
+        </h2>
+        <p>Select an item in the dropdown and the results will show here.</p>
+      </div>
+      <div class="span10">
+        <fieldset>
+          <legend></legend>
+          <div class="clearFix">
+            <label wicket:for="preference">Preference:</label>
+            <div class="input">
+              <select wicket:id="preference">
+                <option>1</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </form>
+</wicket:panel>

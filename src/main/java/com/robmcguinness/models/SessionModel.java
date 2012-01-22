@@ -27,24 +27,20 @@ import org.apache.wicket.request.cycle.RequestCycle;
  */
 public class SessionModel extends AbstractReadOnlyModel<String> {
 
-	boolean stateless = true;
-
 	@Override
 	public String getObject() {
-		final String msg;
-		String sessionId = Application.get().getSessionStore().getSessionId(RequestCycle.get().getRequest(), false);
-		if (sessionId == null) {
+		String msg;
+		if (isStateless()) {
 			msg = "stateless";
-			stateless = true;
 		} else {
 			msg = "statefull";
-			stateless = false;
 		}
 		return msg;
 	}
 
 	public boolean isStateless() {
-		return stateless;
+		String sessionId = Application.get().getSessionStore().getSessionId(RequestCycle.get().getRequest(), false);
+		return sessionId == null;
 	}
 
 }

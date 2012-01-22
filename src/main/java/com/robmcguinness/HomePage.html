@@ -7,103 +7,34 @@
 <meta name="author" content="@robmcguinness">
 </head>
 <body>
-  <div class="topbar">
-    <div class="fill">
-      <div class="container">
-        <h3>
-          <a href="https://github.com/robmcguinness/wicket-stateless">Wicket Stateless <small wicket:id="version">[version]</small></a>
-        </h3>
-        <ul>
-          <li><a href="https://github.com/jolira/wicket-stateless">jolira stateless</a></li>
-          <li><a href="http://wicket.apache.org/">apache wicket</a></li>
-        </ul>
-        <div class="alert-message success session" rel="twipsy" data-content="indicates if application is stateless or stateful" data-trigger="hover" data-placement="below" wicket:id="sessionLabel">[session exists?]</div>
-      </div>
-    </div>
-  </div>
+  <header>
+    <span wicket:id="topBar">[header goes here]</span>
+  </header>
   <div class="container">
     <div class="page-header">
       <h1>Examples</h1>
     </div>
-    <div class="hero-unit">
-      <h1 wicket:id="counterLabel">[0]</h1>
-      <p>
-        <code>StatelessAjaxFallbackLink</code>
-        this link uses ajax when it is available and a regular wicket roundtrip when ajax or javascript are not available.
-      </p>
-      <p>
-        <a class="btn primary large" wicket:id="plusLink">increment</a> <a class="btn info large" wicket:id="minusLink">decrement</a>
-      </p>
-    </div>
+    
+    <span wicket:id="example1">[example 1]</span>
+    
     <div class="content">
-      <form class="formz" wicket:id="inputForm" method="get">
-        <div class="row">
-          <div class="span4">
-            <h2>
-              Submit
-              <code>=></code>
-            </h2>
-            <p>Enter your first and last name and view the results here. Hit clear to reset the page parameters.</p>
-          </div>
-          <div class="span10">
-            <fieldset>
-              <legend><a href="https://github.com/robmcguinness/wicket-stateless/blob/master/src/main/java/com/robmcguinness/HomePage.java#L144">StatelessAjaxButton</a></legend>
-              <div>
-                <label wicket:for="firstName">First Name:</label>
-                <div class="input">
-                  <input wicket:id="firstName" name="firstName" type="text" size="15" />
-                </div>
-              </div>
-              <div>
-                <label wicket:for="lastName">Last Name:</label>
-                <div class="input">
-                  <input wicket:id="lastName" name="lastName" type="text" size="15" />
-                </div>
-              </div>
-              <div class="actions">
-                <input wicket:id="inputFormButton" type="submit" class="btn primary" value="Submit" />
-                <button type="reset" class="btn">Clear</button>
-              </div>
-            </fieldset>
-          </div>
+    
+      <span wicket:id="example2">[example 2]</span>
+      
+      <div class="row">
+        <div class="span4">
+          <h2>Session</h2>
+          <p>Go stateful by clicking the button on the right</p>
         </div>
-
-        <div class="row">
-          <div class="span4">
-            <h2>
-              Dropdowns
-              <code>=></code>
-            </h2>
-            <p>Select an item in the dropdown and the results will show here.</p>
-          </div>
-          <div class="span10">
-            <fieldset>
-              <legend><a href="https://github.com/robmcguinness/wicket-stateless/blob/master/src/main/java/com/robmcguinness/HomePage.java#L170">StatelessAjaxFormComponentUpdatingBehavior</a></legend>
-              <div class="clearFix">
-                <label wicket:for="preference">Preference:</label>
-                <div class="input">
-                  <select wicket:id="preference">
-                    <option>1</option>
-                  </select>
-                </div>
-              </div>
-            </fieldset>
-          </div>
+        <div class="span10 center">
+          <p>
+            <a class="btn danger large" id="plusLink">Click me to create a session</a>
+          </p>
         </div>
-
-        <div class="row">
-            <div class="span4">
-                <h2>Statefulness
-                    <code>=></code>
-                </h2>
-                <p>Go stateful by clicking the button on the right</p>
-            </div>
-            <div class="span10 center">
-                <p><a class="btn danger large" id="plusLink">Create Session</a></p>
-            </div>
-        </div>
-      </form>
+      </div>
+      
     </div>
+    
     <footer>
       <a href="https://twitter.com/#!/robmcguinness">@robmcguinness</a>
     </footer>
