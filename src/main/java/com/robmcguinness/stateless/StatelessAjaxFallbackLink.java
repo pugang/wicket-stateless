@@ -4,6 +4,7 @@ package com.robmcguinness.stateless;
  *
  */
 
+import org.apache.wicket.ajax.AjaxRequestAttributes;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
 import org.apache.wicket.ajax.calldecorator.CancelEventIfNoAjaxDecorator;
@@ -46,12 +47,16 @@ public abstract class StatelessAjaxFallbackLink<T> extends StatelessLink<T> impl
 			}
 
 			@Override
-			@SuppressWarnings("synthetic-access")
 			protected void onComponentTag(final ComponentTag tag) {
 				// only render handler if link is enabled
 				if (isLinkEnabled()) {
 					super.onComponentTag(tag);
 				}
+			}
+			
+			@Override
+			protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
+			  super.updateAjaxAttributes(attributes);
 			}
 
 			@Override
@@ -72,6 +77,10 @@ public abstract class StatelessAjaxFallbackLink<T> extends StatelessLink<T> impl
 	 */
 	protected IAjaxCallDecorator getAjaxCallDecorator() {
 		return null;
+	}
+	
+	protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
+		
 	}
 
 	/**
