@@ -9,11 +9,6 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public abstract class StatelessAjaxFormSubmitBehavior extends AjaxFormSubmitBehavior {
 
-	/**
-	 * should never be accessed directly (thus the __ cause its overkill to create a super class), instead always use #getForm()
-	 */
-	private Form<?> __form;
-
 	public StatelessAjaxFormSubmitBehavior(String event) {
 		this(null, event);
 	}

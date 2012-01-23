@@ -97,7 +97,7 @@ public abstract class StatelessAjaxButton extends Button {
 	 * @param target
 	 * @param form
 	 */
-	protected abstract void onSubmit(AjaxRequestTarget target, Form<?> form);
+	protected abstract void onSubmit(AjaxRequestTarget target, Form<?> _form);
 
 	/**
 	 * Listener method invoked on form submit with errors
@@ -105,10 +105,11 @@ public abstract class StatelessAjaxButton extends Button {
 	 * @param target
 	 * @param form
 	 */
-	protected abstract void onError(AjaxRequestTarget target, Form<?> form);
+	protected abstract void onError(AjaxRequestTarget target, Form<?> _form);
 
 	/**
-	 * Returns the form if it was set in constructor, otherwise returns the form nearest in parent hierarchy.
+	 * Returns the form if it was set in constructor, otherwise returns the form
+	 * nearest in parent hierarchy.
 	 * 
 	 * @see org.apache.wicket.markup.html.form.FormComponent#getForm()
 	 */
@@ -116,9 +117,8 @@ public abstract class StatelessAjaxButton extends Button {
 	public Form<?> getForm() {
 		if (form != null) {
 			return form;
-		} else {
-			return super.getForm();
 		}
+		return super.getForm();
 	}
 
 }

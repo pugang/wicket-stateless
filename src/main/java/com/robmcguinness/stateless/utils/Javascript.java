@@ -4,9 +4,11 @@ import org.apache.wicket.Component;
 
 public class Javascript {
 	
+	private Javascript() {}
+	
 	/**
 	 * Adds a highlighting effect to a component when replaced in an ajax callback by triggering a 
-	 * custom event 'ajax.highlight' on the client
+	 * custom event 'ajax.highlight' in the javascript layer
 	 * @return
 	 */
 	public static String highlight(Component component) {

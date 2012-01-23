@@ -6,15 +6,14 @@
           <a href="https://github.com/robmcguinness/wicket-stateless/blob/master/src/main/java/com/robmcguinness/HomePage.java#L144">StatelessAjaxButton</a>
         </h2>
         <p>Enter your first and last name and view the results here. Hit clear to reset the page parameters.</p>
-        <wicket:enclosure child="yourName">
-          <p>
-            Hello <span wicket:id="yourName">[your name here]</span>!
-          </p>
-        </wicket:enclosure>
+        <p>
+          <span wicket:id="yourName">[your name here]</span>
+        </p>
       </div>
       <div class="span10">
         <fieldset>
           <legend></legend>
+          <div wicket:id="nameFeedback">[feedback panel]</div>
           <div>
             <label wicket:for="firstName">First Name:</label>
             <div class="input">
