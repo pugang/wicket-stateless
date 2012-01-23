@@ -2,6 +2,7 @@ package com.robmcguinness.panels;
 
 import java.util.Arrays;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestAttributes;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -72,20 +73,25 @@ public class Example2Panel extends Panel {
 
 				PageParameters params = target.getPageParameters();
 				logger.debug("onSubmit pageParamters {}", params);
+
 				Example2Panel.this.user.setFirstName(Parameters.getParam(params, "firstName"));
 				Example2Panel.this.user.setLastName(Parameters.getParam(params, "lastName"));
-				yourNameLabel.modelChanged();
+
 				target.add(yourNameLabel);
 				target.appendJavaScript(Javascript.highlight(yourNameLabel));
+				target.add(getFeedback(form));
 			}
 
 			@Override
 			protected void onError(AjaxRequestTarget target, Form<?> form) {
-				PageParameters params = target.getPageParameters();
-				target.addChildren(form, FormComponent.class);
-				target.add(form.get("nameFeedback"));
-				logger.debug("error {}", params);
 
+				target.addChildren(form, FormComponent.class);
+				target.add(getFeedback(form));
+
+			}
+
+			private Component getFeedback(Form<?> form) {
+				return form.get("nameFeedback");
 			}
 
 			@Override
@@ -120,7 +126,11 @@ public class Example2Panel extends Panel {
 		inputForm.add(lastName);
 		add(inputForm);
 
-		inputForm.add(new FeedbackPanel("nameFeedback").setOutputMarkupId(true));
+		FeedbackPanel feedback = new FeedbackPanel("nameFeedback");
+		feedback.setOutputMarkupId(true);
+		feedback.setMarkupId(feedback.getId());
+
+		inputForm.add(feedback);
 
 		// https://www.packtpub.com/apache-wicket-cookbook/book#chapter_3"
 		inputForm.visitChildren(FormComponent.class, new IVisitor<FormComponent<?>, Void>() {
