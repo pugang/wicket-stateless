@@ -1,3 +1,4 @@
+package com.robmcguinness;
 
 
 import org.eclipse.jetty.server.Server;
