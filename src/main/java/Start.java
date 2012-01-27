@@ -1,4 +1,5 @@
-package com.robmcguinness;
+
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
