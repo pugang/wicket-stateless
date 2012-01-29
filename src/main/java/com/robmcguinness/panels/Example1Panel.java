@@ -35,7 +35,7 @@ public class Example1Panel extends Panel {
 
 	public Example1Panel(String id) {
 		super(id);
-		
+
 		PageParameters params = init();
 
 		counterLabel = new CounterLabel(COUNTER, new CounterModel());
@@ -51,7 +51,6 @@ public class Example1Panel extends Panel {
 					updateCounter(getPageParameters(), true);
 				}
 			}
-			
 
 			@Override
 			public void onEvent(IEvent<?> event) {
@@ -89,17 +88,17 @@ public class Example1Panel extends Panel {
 	}
 
 	/**
-	 * Initializes counter value from request parameters (if applicable) and creates a subset of these parameters for use with the components
-	 * on this page. 
+	 * Initializes counter value from request parameters (if applicable) and
+	 * creates a subset of these parameters for use with the components on this
+	 * page.
 	 */
 	private PageParameters init() {
 		counter = 0;
 		StringValue _counter = Parameters.getParameter(COUNTER);
-		boolean isEmpty = _counter.isEmpty();
-		if (!isEmpty) {
+		if (Parameters.isInteger(_counter)) {
 			counter = _counter.toInt();
 		}
-		
+
 		return new Parameters<Example1Panel>().encodePageParameters(this, COUNTER);
 	}
 
@@ -111,9 +110,9 @@ public class Example1Panel extends Panel {
 
 		@Override
 		public void onEvent(IEvent<?> event) {
-			if (event.getPayload() instanceof CounterPayload) {	
+			if (event.getPayload() instanceof CounterPayload) {
 				AjaxRequestTarget target = AjaxRequestTarget.get();
-				if(target != null) {
+				if (target != null) {
 					updateAjaxCounterComponent(this);
 					target.appendJavaScript(Javascript.highlight(this));
 				}
@@ -141,7 +140,7 @@ public class Example1Panel extends Panel {
 	private void updateAjaxCounterComponent(Component component) {
 		AjaxRequestTarget target = AjaxRequestTarget.get();
 		if (target != null) {
-			target.add(component);			
+			target.add(component);
 		}
 	}
 
