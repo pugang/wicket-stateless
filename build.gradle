@@ -34,7 +34,7 @@ libz = [
 	jetty: '7.4.2.v20110526',
 	junit: '4.8.2',
 	logback: '1.0.0',
-	log4j: '1.0'
+	log4j: '1.6.4'
 ]
 
 dependencies {
@@ -47,7 +47,7 @@ dependencies {
 
 	// logging
 	compile	'ch.qos.logback:logback-classic:'+libz.logback,
-		'org.slf4j:slf4j-log4j13:'+libz.log4j
+		'org.slf4j:slf4j-log4j12:'+libz.log4j
 
 	// test
 	testCompile 'junit:junit:'+libz.junit
