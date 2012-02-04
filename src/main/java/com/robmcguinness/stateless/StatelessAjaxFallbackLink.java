@@ -4,10 +4,8 @@ package com.robmcguinness.stateless;
  *
  */
 
-import org.apache.wicket.ajax.AjaxRequestAttributes;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.IAjaxCallDecorator;
-import org.apache.wicket.ajax.calldecorator.CancelEventIfNoAjaxDecorator;
+import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.ajax.markup.html.IAjaxLink;
 import org.apache.wicket.markup.ComponentTag;
@@ -37,11 +35,6 @@ public abstract class StatelessAjaxFallbackLink<T> extends StatelessLink<T> impl
 		add(new StatelessAjaxEventBehavior("onclick") {
 
 			@Override
-			protected IAjaxCallDecorator getAjaxCallDecorator() {
-				return new CancelEventIfNoAjaxDecorator(StatelessAjaxFallbackLink.this.getAjaxCallDecorator());
-			}
-
-			@Override
 			protected PageParameters getPageParameters() {
 				return StatelessAjaxFallbackLink.this.getPageParameters();
 			}
@@ -53,10 +46,10 @@ public abstract class StatelessAjaxFallbackLink<T> extends StatelessLink<T> impl
 					super.onComponentTag(tag);
 				}
 			}
-			
+
 			@Override
 			protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
-			  super.updateAjaxAttributes(attributes);
+				super.updateAjaxAttributes(attributes);
 			}
 
 			@Override
@@ -72,18 +65,6 @@ public abstract class StatelessAjaxFallbackLink<T> extends StatelessLink<T> impl
 	}
 
 	/**
-	 * 
-	 * @return call decorator to use or null if none
-	 */
-	protected IAjaxCallDecorator getAjaxCallDecorator() {
-		return null;
-	}
-	
-	protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
-		
-	}
-
-	/**
 	 * @see Link#onClick()
 	 */
 	@Override
@@ -92,9 +73,11 @@ public abstract class StatelessAjaxFallbackLink<T> extends StatelessLink<T> impl
 	}
 
 	/**
-	 * Callback for the onClick event. If ajax failed and this event was generated via a normal link the target argument will be null
+	 * Callback for the onClick event. If ajax failed and this event was generated
+	 * via a normal link the target argument will be null
 	 * 
-	 * @param target ajax target if this linked was invoked using ajax, null otherwise
+	 * @param target
+	 *          ajax target if this linked was invoked using ajax, null otherwise
 	 */
 	@Override
 	public abstract void onClick(final AjaxRequestTarget target);

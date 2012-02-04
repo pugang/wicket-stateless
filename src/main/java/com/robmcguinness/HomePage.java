@@ -1,18 +1,20 @@
 package com.robmcguinness;
 
 import org.apache.wicket.devutils.stateless.StatelessComponent;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.resource.header.CssHeaderItem;
-import org.apache.wicket.resource.header.JavaScriptHeaderItem;
 
 import com.robmcguinness.assets.Assets;
 import com.robmcguinness.panels.Example1Panel;
 import com.robmcguinness.panels.Example2Panel;
 import com.robmcguinness.panels.HeaderPanel;
+import com.robmcguinness.stateless.StatelessLink;
 
 @StatelessComponent
 public class HomePage extends WebPage {
@@ -20,27 +22,37 @@ public class HomePage extends WebPage {
 	/**
 	 * Instantiates a new home page.
 	 * 
-	 * @param parameters the parameters
+	 * @param parameters
+	 *          the parameters
 	 */
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
-		
+
 		add(new HeaderPanel("topBar").setRenderBodyOnly(true));
 		add(new Example1Panel("example1").setRenderBodyOnly(true));
 		add(new Example2Panel("example2").setRenderBodyOnly(true));
 
+		add(new StatelessLink<Void>("createSessionLink") {
+
+			@Override
+			public void onClick() {
+				getSession().bind();
+			}
+		});
+
+		add(new HeaderResponseContainer("footerBucket", "footerBucket"));
+
 	}
-	
+
 	@Override
 	public void renderHead(IHeaderResponse response) {
 
 		response.render(CssHeaderItem.forReference(new CssResourceReference(Assets.class, "bootstrap.min.css")));
 		response.render(CssHeaderItem.forReference(new CssResourceReference(Assets.class, "stateless.css")));
 
-		response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(Assets.class, "bootstrap-twipsy.js")));
-		response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(Assets.class, "bootstrap-popover.js")));
+		response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(Assets.class, "bootstrap.min.js")));
 		response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(Assets.class, "stateless.js")));
 
 	}
-	
+
 }

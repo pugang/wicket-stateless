@@ -7,16 +7,20 @@ targetCompatibility = '1.6'
 sourceCompatibility = '1.6'
 
 group = 'com.robmcguinness'
-archivesBaseName = 'wicket-stateless' 
+archivesBaseName = 'wicket-stateless'
 version = '0.0.1-SNAPSHOT'
 description ="A sample project that uses Wicket stateless ajax components."
 
 repositories {
 	mavenLocal()
 	mavenCentral()
-	maven {
-		url "https://repository.apache.org/content/repositories/snapshots/"
-	}
+
+	// apache snapshot is very old so using my own custom github maven repo
+	mavenRepo(urls: 'https://github.com/robmcguinness/maven-repository/raw/master/snapshots/')
+
+	// url "https://repository.apache.org/content/repositories/snapshots/"
+
+
 }
 
 // never include this modules in build
@@ -27,7 +31,7 @@ configurations {
 }
 
 libz = [
-	wicket: '6.0-SNAPSHOT',
+	wicket: '6-CUSTOM-SNAPSHOT',
 	jetty: '7.4.2.v20110526',
 	junit: '4.8.2',
 	logback: '1.0.0'
@@ -35,7 +39,7 @@ libz = [
 
 dependencies {
 	// wicket
-	compile	'org.apache.wicket:wicket:'+libz.wicket,
+	compile	'org.apache.wicket:wicket-core:'+libz.wicket,
 			'org.apache.wicket:wicket-devutils:'+libz.wicket
 
 	// jetty

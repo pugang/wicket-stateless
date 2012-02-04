@@ -1,6 +1,5 @@
 package com.robmcguinness.panels;
 
-import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.event.IEvent;
@@ -14,25 +13,27 @@ import com.robmcguinness.stateless.StatelessLabel;
 
 /**
  * This is the fixed header bar.
+ * 
  * @author robertmcguinness
- *
+ * 
  */
 public class HeaderPanel extends Panel {
 
 	public HeaderPanel(String id) {
 		super(id);
-		
+
 		add(new StatelessLabel("version", new AbstractReadOnlyModel<String>() {
 
 			@Override
 			public String getObject() {
-				return Application.get().getFrameworkSettings().getVersion();
+				// return Application.get().getFrameworkSettings().getVersion();
+				return "6-CUSTOM-SNAPSHOT";
 			}
 		}));
-		
+
 		add(new SessionLabel("sessionLabel", new SessionModel()).setOutputMarkupId(true));
 	}
-	
+
 	private class SessionLabel extends StatelessLabel {
 
 		public SessionLabel(String id, IModel<?> model) {
@@ -44,12 +45,12 @@ public class HeaderPanel extends Panel {
 			super.onBeforeRender();
 			SessionModel model = (SessionModel) getDefaultModel();
 			if (model.isStateless()) {
-				add(new AttributeModifier("class", new Model<String>("alert-message success session")));
+				add(new AttributeModifier("class", new Model<String>("btn-success btn-large session")));
 			} else {
-				add(new AttributeModifier("class", new Model<String>("alert-message error session")));
+				add(new AttributeModifier("class", new Model<String>("btn-danger btn-large session")));
 			}
 		}
-		
+
 		@Override
 		public void onEvent(IEvent<?> event) {
 			// update the session label on every ajax request

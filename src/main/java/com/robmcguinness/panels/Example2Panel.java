@@ -3,33 +3,31 @@ package com.robmcguinness.panels;
 import java.util.Arrays;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxRequestAttributes;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.util.parse.metapattern.MetaPattern;
-import org.apache.wicket.util.string.Strings;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
-import org.apache.wicket.validation.validator.PatternValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.robmcguinness.behaviors.ErrorClassBehavior;
+import com.robmcguinness.feedback.InlineFeedbackPanel;
 import com.robmcguinness.stateless.StatelessAjaxButton;
 import com.robmcguinness.stateless.StatelessAjaxFormComponentUpdatingBehavior;
 import com.robmcguinness.stateless.StatelessLabel;
 import com.robmcguinness.stateless.utils.HTML;
 import com.robmcguinness.stateless.utils.Javascript;
 import com.robmcguinness.stateless.utils.Parameters;
+import com.robmcguinness.stateless.utils.Validation;
 
 /**
  * Various stateless form ajax behaviors.
@@ -41,27 +39,22 @@ public class Example2Panel extends Panel {
 
 	private static final Logger logger = LoggerFactory.getLogger(Example2Panel.class);
 	private transient User user;
-	private StatelessLabel yourNameLabel;
+	private WebMarkupContainer yourNameContainer;
+	private static String NAME = "name";
 
 	public Example2Panel(String id) {
 		super(id);
 
 		user = new User();
-		// hydrate user object from page parameters
-		user.setFirstName(Parameters.getParam("firstName"));
-		user.setLastName(Parameters.getParam("lastName"));
+		user.setName(Parameters.getParam(NAME));
 
-		final TextField<String> firstName = new TextField<String>("firstName", new PropertyModel<String>(this, "user.firstName"));
-		firstName.setMarkupId(firstName.getId());
-		firstName.add(HTML.maxLength(20));
-		firstName.setRequired(true);
-		firstName.add(new PatternValidator(MetaPattern.STRING));
-
-		final TextField<String> lastName = new TextField<String>("lastName", new PropertyModel<String>(this, "user.lastName"));
-		lastName.setMarkupId(lastName.getId());
-		lastName.add(HTML.maxLength(20));
-		firstName.add(new PatternValidator(MetaPattern.STRING));
-		lastName.setRequired(true);
+		final TextField<String> name = new TextField<String>(NAME, new PropertyModel<String>(this, "user.name"));
+		name.setMarkupId(name.getId());
+		name.add(HTML.maxLength(30));
+		name.setRequired(true);
+		// TODO[rm3]: get label from label:for
+		name.setLabel(new Model<String>("Name"));
+		name.add(new Validation("[a-zA-Z][a-zA-Z -]+").setKey("name.valid"));
 
 		final Form<String> inputForm = new StatelessForm<String>("inputForm");
 		inputForm.setMarkupId(inputForm.getId());
@@ -74,11 +67,10 @@ public class Example2Panel extends Panel {
 				PageParameters params = target.getPageParameters();
 				logger.debug("onSubmit pageParamters {}", params);
 
-				Example2Panel.this.user.setFirstName(Parameters.getParam(params, "firstName"));
-				Example2Panel.this.user.setLastName(Parameters.getParam(params, "lastName"));
+				Example2Panel.this.user.setName(Parameters.getParam(params, NAME));
 
-				target.add(yourNameLabel);
-				target.appendJavaScript(Javascript.highlight(yourNameLabel));
+				target.add(yourNameContainer);
+				target.appendJavaScript(Javascript.highlight(yourNameContainer));
 				target.add(getFeedback(form));
 			}
 
@@ -94,18 +86,23 @@ public class Example2Panel extends Panel {
 				return form.get("nameFeedback");
 			}
 
-			@Override
-			protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
-				attributes.getDynamicExtraParameters().add("return Wicket.Form.serializeElement('" + firstName.getMarkupId() + "')");
-				attributes.getDynamicExtraParameters().add("return Wicket.Form.serializeElement('" + lastName.getMarkupId() + "')");
-
-			}
-
 		});
 
-		yourNameLabel = new StatelessLabel("yourName", new PropertyModel<String>(this, "user.salutation"));
+		yourNameContainer = new WebMarkupContainer("yourNameContainer") {
+			@Override
+			public boolean isVisible() {
+				return Example2Panel.this.user.getName() != null;
+			}
+		};
+		yourNameContainer.setMarkupId(yourNameContainer.getId());
+		yourNameContainer.setOutputMarkupPlaceholderTag(true);
+		add(yourNameContainer);
+		StatelessLabel yourNameLabel = new StatelessLabel("yourName", new PropertyModel<String>(this, "user.name"));
 		yourNameLabel.setOutputMarkupPlaceholderTag(true);
-		inputForm.add(yourNameLabel);
+		yourNameContainer.add(yourNameLabel);
+
+		inputForm.add(name);
+		add(inputForm);
 
 		final DropDownChoice<String> preference = new DropDownChoice<String>("preference", new Model<String>("Tebowing"), Arrays.asList(new String[] { "Tebowing", "Gronking", "Other" }));
 		preference.add(new StatelessAjaxFormComponentUpdatingBehavior("onchange") {
@@ -121,12 +118,9 @@ public class Example2Panel extends Panel {
 			}
 		});
 		preference.setMarkupId(preference.getId());
-		inputForm.add(firstName);
-		inputForm.add(preference);
-		inputForm.add(lastName);
-		add(inputForm);
+		add(preference);
 
-		FeedbackPanel feedback = new FeedbackPanel("nameFeedback");
+		InlineFeedbackPanel feedback = new InlineFeedbackPanel("nameFeedback", name);
 		feedback.setOutputMarkupId(true);
 		feedback.setMarkupId(feedback.getId());
 
@@ -145,31 +139,15 @@ public class Example2Panel extends Panel {
 	}
 
 	private class User {
-		private String firstName;
-		private String lastName;
 
-		public String getFirstName() {
-			return firstName;
+		private String name;
+
+		public String getName() {
+			return name;
 		}
 
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
-
-		public String getLastName() {
-			return lastName;
-		}
-
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
-
-		public String getSalutation() {
-			if (Strings.isEmpty(firstName) || Strings.isEmpty(lastName))
-				return null;
-
-			return "Hello " + firstName + " " + lastName + "!";
-
+		public void setName(String name) {
+			this.name = name;
 		}
 
 	}

@@ -1,15 +1,13 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
-  <div class="topbar">
-    <div class="fill">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
       <div class="container">
-        <h3>
-          <a href="https://github.com/robmcguinness/wicket-stateless">wicket stateless<small wicket:id="version">[version]</small></a>
-        </h3>
-        <ul>
+        <a class="brand"href="https://github.com/robmcguinness/wicket-stateless">wicket stateless <small wicket:id="version">[version]</small></a>
+        <ul class="nav">
           <li><a href="https://github.com/jolira/wicket-stateless">jolira stateless</a></li>
           <li><a href="http://wicket.apache.org/">apache wicket</a></li>
         </ul>
-        <div class="alert-message success session" rel="twipsy" data-content="indicates if application is stateless or stateful" data-trigger="hover" data-placement="below" wicket:id="sessionLabel">[session exists?]</div>
+        <div class="alert-message success session" wicket:id="sessionLabel">[session exists?]</div>
       </div>
     </div>
   </div>

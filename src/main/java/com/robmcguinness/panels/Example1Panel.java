@@ -111,7 +111,8 @@ public class Example1Panel extends Panel {
 		@Override
 		public void onEvent(IEvent<?> event) {
 			if (event.getPayload() instanceof CounterPayload) {
-				AjaxRequestTarget target = AjaxRequestTarget.get();
+
+				AjaxRequestTarget target = this.getRequestCycle().find(AjaxRequestTarget.class);
 				if (target != null) {
 					updateAjaxCounterComponent(this);
 					target.appendJavaScript(Javascript.highlight(this));
@@ -138,7 +139,7 @@ public class Example1Panel extends Panel {
 	}
 
 	private void updateAjaxCounterComponent(Component component) {
-		AjaxRequestTarget target = AjaxRequestTarget.get();
+		AjaxRequestTarget target = component.getRequestCycle().find(AjaxRequestTarget.class);
 		if (target != null) {
 			target.add(component);
 		}

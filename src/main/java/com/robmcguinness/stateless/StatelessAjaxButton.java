@@ -1,13 +1,11 @@
 package com.robmcguinness.stateless;
 
-import org.apache.wicket.ajax.AjaxRequestAttributes;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.util.string.AppendingStringBuffer;
-import org.apache.wicket.util.string.Strings;
 
 public abstract class StatelessAjaxButton extends Button {
 
@@ -59,21 +57,6 @@ public abstract class StatelessAjaxButton extends Button {
 			protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
 				super.updateAjaxAttributes(attributes);
 				StatelessAjaxButton.this.updateAjaxAttributes(attributes);
-			}
-
-			@Override
-			protected CharSequence getEventHandler() {
-				final String script = StatelessAjaxButton.this.getOnClickScript();
-
-				AppendingStringBuffer handler = new AppendingStringBuffer();
-
-				if (!Strings.isEmpty(script)) {
-					handler.append(script).append(";");
-				}
-
-				handler.append(super.getEventHandler());
-				handler.append("; return false;");
-				return handler;
 			}
 
 		});

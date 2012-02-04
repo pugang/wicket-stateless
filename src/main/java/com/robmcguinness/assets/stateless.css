@@ -7,50 +7,6 @@ body {
     margin-top: 20px;
 }
 
-section {
-    margin-bottom: 60px;
-}
-
-label {
-    cursor: pointer;
-}
-
-fieldset legend {
-    font-size: 16.5px;
-}
-
-.container {
-    width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
-}
-
-.container .page-header {
-    margin-top: 30px;
-}
-
-.session {
-    width: 100px;
-    float: right;
-    margin-top: 4px;
-    text-align: center;
-}
-
-.topbar .alert-message {
-    margin-bottom: 0px;
-}
-
-.topbar h3 small {
-    font-size: 10px;
-}
-
-.hero-unit code {
-    font-size: 14px;
-}
-
-.content .span10 {
-    margin-left: 0;
-    padding-left: 19px;
-}
-
 .container > footer {
     margin-bottom: 30px
 }
@@ -60,20 +16,35 @@ fieldset legend {
     text-align: center;
 }
 
-.formz fieldset > div {
-    margin-bottom: 10px;
+.navbar .navbar-inner {
+	padding-bottom: 3px;
 }
 
-.formz .row {
-    margin-bottom: 60px;
+.highlight {
+    -webkit-animation: target-fade 3s 1;
+    -moz-animation: target-fade 3s 1;
+    border-radius: 5px;
+    padding: 1px;
 }
 
-.center {
+.navbar small {
+	font-size: 10px;
+	color: #BFBFBF;
+}
+
+.session {
+    width: 100px;
+    float: right;
+    margin-top: 4px;
     text-align: center;
 }
 
-.center a {
-    width: 100%;
+.container .page-header {
+	margin-top: 30px;
+}
+
+.row {
+	margin-bottom: 30px;
 }
 
 .wrapper {
@@ -87,13 +58,6 @@ fieldset legend {
     word-wrap: break-word;      /* IE 5+ */
     line-height: 20px;
     margin-bottom: 2px;
-}
-
-.highlight {
-    -webkit-animation: target-fade 3s 1;
-    -moz-animation: target-fade 3s 1;
-    border-radius: 5px;
-    padding: 1px;
 }
 
 @-webkit-keyframes target-fade {
