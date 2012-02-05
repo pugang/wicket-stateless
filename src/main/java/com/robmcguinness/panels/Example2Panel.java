@@ -1,11 +1,8 @@
 package com.robmcguinness.panels;
 
-import java.util.Arrays;
-
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.StatelessForm;
@@ -22,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import com.robmcguinness.behaviors.ErrorClassBehavior;
 import com.robmcguinness.feedback.InlineFeedbackPanel;
 import com.robmcguinness.stateless.StatelessAjaxButton;
-import com.robmcguinness.stateless.StatelessAjaxFormComponentUpdatingBehavior;
 import com.robmcguinness.stateless.StatelessLabel;
 import com.robmcguinness.stateless.utils.HTML;
 import com.robmcguinness.stateless.utils.Javascript;
@@ -41,6 +37,7 @@ public class Example2Panel extends Panel {
 	private transient User user;
 	private WebMarkupContainer yourNameContainer;
 	private static String NAME = "name";
+	private static String VALIDATE_NAME = "[a-zA-Z][a-zA-Z -]+";
 
 	public Example2Panel(String id) {
 		super(id);
@@ -54,7 +51,7 @@ public class Example2Panel extends Panel {
 		name.setRequired(true);
 		// TODO[rm3]: get label from label:for
 		name.setLabel(new Model<String>("Name"));
-		name.add(new Validation("[a-zA-Z][a-zA-Z -]+").setKey("name.valid"));
+		name.add(new Validation(VALIDATE_NAME).setKey("name.valid"));
 
 		final Form<String> inputForm = new StatelessForm<String>("inputForm");
 		inputForm.setMarkupId(inputForm.getId());
@@ -76,10 +73,8 @@ public class Example2Panel extends Panel {
 
 			@Override
 			protected void onError(AjaxRequestTarget target, Form<?> form) {
-
 				target.addChildren(form, FormComponent.class);
 				target.add(getFeedback(form));
-
 			}
 
 			private Component getFeedback(Form<?> form) {
@@ -103,22 +98,6 @@ public class Example2Panel extends Panel {
 
 		inputForm.add(name);
 		add(inputForm);
-
-		final DropDownChoice<String> preference = new DropDownChoice<String>("preference", new Model<String>("Tebowing"), Arrays.asList(new String[] { "Tebowing", "Gronking", "Other" }));
-		preference.add(new StatelessAjaxFormComponentUpdatingBehavior("onchange") {
-
-			@Override
-			protected PageParameters getPageParameters() {
-				return new PageParameters();
-			}
-
-			@Override
-			protected void onUpdate(final AjaxRequestTarget target) {
-				logger.debug("pageParamters {}", getPageParameters());
-			}
-		});
-		preference.setMarkupId(preference.getId());
-		add(preference);
 
 		InlineFeedbackPanel feedback = new InlineFeedbackPanel("nameFeedback", name);
 		feedback.setOutputMarkupId(true);

@@ -17,6 +17,8 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
  */
 public abstract class StatelessAjaxFormComponentUpdatingBehavior extends AjaxFormComponentUpdatingBehavior {
 
+	private PageParameters params;
+
 	/**
 	 * @param event
 	 */
@@ -25,21 +27,24 @@ public abstract class StatelessAjaxFormComponentUpdatingBehavior extends AjaxFor
 	}
 
 	/**
-	 * Adding parameters the generated URL. This preferably would be handled by the {@link StatelessWebRequestCodingStrategy}, but the frameworks currently is lacking a way to pass
-	 * the parameters to that class.
-	 * 
 	 * 
 	 * @see AbstractAjaxBehavior#getCallbackUrl()
 	 */
 	@Override
 	public CharSequence getCallbackUrl() {
-		final Url url = Url.parse(super.getCallbackUrl().toString());
-		final PageParameters params = getPageParameters();
 
-		return mergeParameters(url, params).toString();
+		final Url url = Url.parse(super.getCallbackUrl().toString());
+
+		return mergeParameters(url, getPageParameters()).toString();
 	}
 
-	protected abstract PageParameters getPageParameters();
+	protected PageParameters getPageParameters() {
+		return params;
+	}
+
+	public void setParams(PageParameters params) {
+		this.params = params;
+	}
 
 	/**
 	 * @return always {@literal true}

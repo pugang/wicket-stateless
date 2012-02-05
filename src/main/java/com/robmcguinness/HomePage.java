@@ -13,6 +13,7 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import com.robmcguinness.assets.Assets;
 import com.robmcguinness.panels.Example1Panel;
 import com.robmcguinness.panels.Example2Panel;
+import com.robmcguinness.panels.Example3Panel;
 import com.robmcguinness.panels.HeaderPanel;
 import com.robmcguinness.stateless.StatelessLink;
 
@@ -31,6 +32,7 @@ public class HomePage extends WebPage {
 		add(new HeaderPanel("topBar").setRenderBodyOnly(true));
 		add(new Example1Panel("example1").setRenderBodyOnly(true));
 		add(new Example2Panel("example2").setRenderBodyOnly(true));
+		add(new Example3Panel("example3").setRenderBodyOnly(true));
 
 		add(new StatelessLink<Void>("createSessionLink") {
 

@@ -15,7 +15,7 @@ logging.captureStandardOutput LogLevel.WARN
 
 group = 'com.robmcguinness'
 archivesBaseName = 'wicket-stateless'
-version = '0.0.2-SNAPSHOT'
+version = '0.0.3-SNAPSHOT'
 description ="A sample project that uses Wicket stateless ajax components."
 
 mainClassName = "com.robmcguinness.Start"
