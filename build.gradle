@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'war'
 apply plugin: 'maven'
+apply plugin:'application'
 
 targetCompatibility = '1.6'
 sourceCompatibility = '1.6'
@@ -10,6 +11,9 @@ group = 'com.robmcguinness'
 archivesBaseName = 'wicket-stateless'
 version = '0.0.2-SNAPSHOT'
 description ="A sample project that uses Wicket stateless ajax components."
+
+mainClassName = "com.robmcguinness.Start"
+applicationName = "app"
 
 repositories {
 	mavenLocal()
@@ -34,7 +38,8 @@ libz = [
 	jetty: '7.4.2.v20110526',
 	junit: '4.8.2',
 	logback: '1.0.0',
-	log4j: '1.6.4'
+	log4j: '1.6.4',
+	servlet: '2.5'
 ]
 
 dependencies {
@@ -49,9 +54,13 @@ dependencies {
 	compile	'ch.qos.logback:logback-classic:'+libz.logback,
 		'org.slf4j:slf4j-log4j12:'+libz.log4j
 
+	compile 'javax.servlet:servlet-api:'+libz.servlet
+
 	// test
 	testCompile 'junit:junit:'+libz.junit
 }
+
+task stage(dependsOn: ['clean', 'installApp'])
 
 task createMavenProjectStructure << {
     logger.info("Creating Maven Project Structure\n")
