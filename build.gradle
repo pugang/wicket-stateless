@@ -16,7 +16,6 @@ mainClassName = "com.robmcguinness.Start"
 applicationName = "app"
 
 repositories {
-	mavenLocal()
 	mavenCentral()
 
 	// apache wicket snapshot is very old so using my own custom github maven repo
@@ -31,15 +30,15 @@ configurations {
 	all*.exclude module: 'commons-logging'
 	all*.exclude group: 'cglib', module: 'cglib-nodep'
 	all*.exclude group: 'log4j', module: 'log4j'
+	all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
 }
 
 libz = [
 	wicket: '6-CUSTOM-SNAPSHOT',
-	jetty: '7.4.2.v20110526',
+	jetty: '7.5.4.v20111024',
 	junit: '4.8.2',
-	logback: '1.0.0',
-	log4j: '1.6.4',
-	servlet: '2.5'
+	logback: '0.9.30',
+	log4j: '1.6.4'
 ]
 
 dependencies {
@@ -48,13 +47,11 @@ dependencies {
 			'org.apache.wicket:wicket-devutils:'+libz.wicket
 
 	// jetty
-	compile "org.eclipse.jetty.aggregate:jetty-all-server:"+libz.jetty
+	compile "org.eclipse.jetty:jetty-webapp:"+libz.jetty
 
 	// logging
 	compile	'ch.qos.logback:logback-classic:'+libz.logback,
-		'org.slf4j:slf4j-log4j12:'+libz.log4j
-
-	compile 'javax.servlet:servlet-api:'+libz.servlet
+	'org.slf4j:log4j-over-slf4j:'+libz.log4j
 
 	// test
 	testCompile 'junit:junit:'+libz.junit
