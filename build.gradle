@@ -21,6 +21,13 @@ description ="A sample project that uses Wicket stateless ajax components."
 mainClassName = "com.robmcguinness.Start"
 applicationName = "app"
 
+manifest.mainAttributes(
+	"Built-By": System.getProperty("user.name"),
+	"Implementation-Title": "Wicket-Stateless",
+	"Implementation-Version": version,
+	"Implementation-Vendor": "robmcguinness.com"
+)
+
 repositories {
 	mavenCentral()
 

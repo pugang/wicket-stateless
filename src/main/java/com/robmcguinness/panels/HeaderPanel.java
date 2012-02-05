@@ -7,6 +7,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.util.string.Strings;
 
 import com.robmcguinness.models.SessionModel;
 import com.robmcguinness.stateless.StatelessLabel;
@@ -26,8 +27,7 @@ public class HeaderPanel extends Panel {
 
 			@Override
 			public String getObject() {
-				// return Application.get().getFrameworkSettings().getVersion();
-				return "6-CUSTOM-SNAPSHOT";
+				return getVersion();
 			}
 		}));
 
@@ -59,6 +59,15 @@ public class HeaderPanel extends Panel {
 			}
 		}
 
+	}
+
+	public String getVersion() {
+		String implVersion = null;
+		Package pkg = getClass().getPackage();
+		if (pkg != null) {
+			implVersion = pkg.getImplementationVersion();
+		}
+		return Strings.isEmpty(implVersion) ? "n/a" : implVersion;
 	}
 
 }
