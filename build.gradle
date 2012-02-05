@@ -7,6 +7,12 @@ apply plugin:'application'
 targetCompatibility = '1.6'
 sourceCompatibility = '1.6'
 
+// *.html, *.xml and *.properties + other files copy forward to build directory
+sourceSets.main.output.resourcesDir 'src/main/java'
+sourceSets.test.output.resourcesDir 'src/test/java'
+
+logging.captureStandardOutput LogLevel.WARN
+
 group = 'com.robmcguinness'
 archivesBaseName = 'wicket-stateless'
 version = '0.0.2-SNAPSHOT'
