@@ -14,6 +14,7 @@ import com.robmcguinness.assets.Assets;
 import com.robmcguinness.panels.Example1Panel;
 import com.robmcguinness.panels.Example2Panel;
 import com.robmcguinness.panels.Example3Panel;
+import com.robmcguinness.panels.Example4Panel;
 import com.robmcguinness.panels.HeaderPanel;
 import com.robmcguinness.stateless.StatelessLink;
 
@@ -33,6 +34,7 @@ public class HomePage extends WebPage {
 		add(new Example1Panel("example1").setRenderBodyOnly(true));
 		add(new Example2Panel("example2").setRenderBodyOnly(true));
 		add(new Example3Panel("example3").setRenderBodyOnly(true));
+		add(new Example4Panel("example4", parameters).setRenderBodyOnly(true));
 
 		add(new StatelessLink<Void>("createSessionLink") {
 
@@ -49,11 +51,13 @@ public class HomePage extends WebPage {
 	@Override
 	public void renderHead(IHeaderResponse response) {
 
+		response.render(CssHeaderItem.forUrl("http://fonts.googleapis.com/css?family=Arvo:400,700"));
 		response.render(CssHeaderItem.forReference(new CssResourceReference(Assets.class, "bootstrap.min.css")));
 		response.render(CssHeaderItem.forReference(new CssResourceReference(Assets.class, "stateless.css")));
 
 		response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(Assets.class, "bootstrap.min.js")));
 		response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(Assets.class, "stateless.js")));
+		response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(Assets.class, "jquery.timeago.js")));
 
 	}
 

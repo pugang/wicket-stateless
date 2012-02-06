@@ -22,8 +22,7 @@ public class Parameters<T> {
 	}
 
 	/**
-	 * Modified slight from ParameterSpec.java class provided by <a
-	 * href="http://www.55minutes.com)">55 Minutes</a> </p>
+	 * Modified slight from ParameterSpec.java class provided by <a href="http://www.55minutes.com)">55 Minutes</a> </p>
 	 * 
 	 * Use this method in your page constructor to parse the PageParameters. </p>
 	 * 
@@ -33,12 +32,9 @@ public class Parameters<T> {
 	 *          Values will be set using appropriate setters on this bean
 	 * 
 	 * @throws AbortWithHttpErrorCodeException
-	 *           with a 404 status code if {@code throw404OnParseError} is
-	 *           {@code true} and a parsing exception occurs. For example, this
-	 *           could happen if the bean property for "id" is of type Long, but
-	 *           the parameter value being parsed is not numeric. If
-	 *           {@code throw404OnParseError} is {@code false}, skip past
-	 *           properties with parsing errors.
+	 *           with a 404 status code if {@code throw404OnParseError} is {@code true} and a parsing exception occurs. For example, this could happen
+	 *           if the bean property for "id" is of type Long, but the parameter value being parsed is not numeric. If {@code throw404OnParseError} is
+	 *           {@code false}, skip past properties with parsing errors.
 	 */
 	public final void parsePageParameters(PageParameters params, T bean, boolean throw404OnParseError) {
 

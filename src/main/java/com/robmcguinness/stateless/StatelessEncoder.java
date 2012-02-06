@@ -22,10 +22,13 @@ final class StatelessEncoder {
 	private static final Logger logger = LoggerFactory.getLogger(StatelessEncoder.class);
 
 	/**
-	 * Merges the query parameters of the url with the named parameters from the {@link PageParameters}. The page parameters override the query parameters.
+	 * Merges the query parameters of the url with the named parameters from the {@link PageParameters}. The page parameters override the query
+	 * parameters.
 	 * 
-	 * @param url the url with the original parameters
-	 * @param params the page parameters to merge
+	 * @param url
+	 *          the url with the original parameters
+	 * @param params
+	 *          the page parameters to merge
 	 * @return an Url with merged parameters
 	 */
 	static Url mergeParameters(final Url url, final PageParameters params) {
@@ -36,7 +39,7 @@ final class StatelessEncoder {
 
 		Charset charset = url.getCharset();
 
-		logger.debug("merging url[{}] with pageParameters[{}]", url.toString(), params);
+		logger.debug("merging url[{}] with parameters[{}]", url.toString(), params);
 
 		Url mergedUrl = Url.parse(url.toString(), charset);
 

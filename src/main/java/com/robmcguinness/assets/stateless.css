@@ -4,7 +4,37 @@ html, body {
 }
 
 body {
+	font-family: 'Arvo', serif !important;
     margin-top: 20px;
+}
+
+p {
+	font-family: 'Arvo', serif !important;
+}
+
+label, input, button, select, textarea {
+	font-family: 'Arvo', serif !important;
+}
+
+a:visited {
+	color: #56B4E9;
+}
+
+a {
+	color: #56B4E9;
+	text-decoration: none;
+}
+
+a.btn-danger {
+	color: white;
+}
+
+.hero-unit h1 {
+	font-size: 75px;
+}
+
+.hero-unit p {
+	font-size: 20px;
 }
 
 .container > footer {
@@ -37,6 +67,14 @@ body {
     float: right;
     margin-top: 4px;
     text-align: center;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.centerT {
+	text-align: center;
 }
 
 .container .page-header {
