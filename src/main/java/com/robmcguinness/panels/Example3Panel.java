@@ -29,9 +29,9 @@ public class Example3Panel extends Panel {
 
 	static {
 		PREFERENCES.put("Tebowing", "to get down on a knee and start praying");
-		PREFERENCES.put("Gronking", "act of ferociously spiking object into the ground in an attempt to obliterate it beyond recognition");
+		PREFERENCES.put("Gronking", "the act of ferociously spiking an object into the ground");
 		PREFERENCES.put("Planking", "an activity consisting of lying face down in an unusual or incongruous location");
-		PREFERENCES.put("Conaning", "crush your enemies, see them driven before you, and to hear the lamentation of their women");
+		PREFERENCES.put("Conaning", "to crush your enemies, see them driven before you, and to hear the lamentation of their women");
 	}
 
 	private DropDownChoice<String> preferenceDDC;
