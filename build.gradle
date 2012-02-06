@@ -31,7 +31,7 @@ manifest.mainAttributes(
 repositories {
 
 	maven { url 'http://download.java.net/maven/2/' }
-	maven { url 'https://github.com/robmcguinness/maven-repository/raw/master/snapshots/' } // apache wicket snapshot is very old so using my own custom github maven repo
+	maven { url 'https://raw.github.com/robmcguinness/maven-repository/master/snapshots/' } // apache wicket snapshot is very old so using my own custom github maven repo
 
 	mavenCentral()
 
