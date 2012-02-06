@@ -29,12 +29,11 @@ manifest.mainAttributes(
 )
 
 repositories {
-	mavenCentral()
 
-	// apache wicket snapshot is very old so using my own custom github maven repo
-	maven {
-		url 'https://github.com/robmcguinness/maven-repository/raw/master/snapshots/'
-	}
+	maven { url 'http://download.java.net/maven/2/' }
+	maven { url 'https://github.com/robmcguinness/maven-repository/raw/master/snapshots/' } // apache wicket snapshot is very old so using my own custom github maven repo
+
+	mavenCentral()
 
 }
 
@@ -51,20 +50,26 @@ libz = [
 	jetty: '7.5.4.v20111024',
 	junit: '4.8.2',
 	logback: '0.9.30',
-	log4j: '1.6.4'
+	log4j: '1.6.4',
+	jersey: '1.11'
 ]
 
 dependencies {
 	// wicket
 	compile	'org.apache.wicket:wicket-core:'+libz.wicket,
-			'org.apache.wicket:wicket-devutils:'+libz.wicket
+		'org.apache.wicket:wicket-devutils:'+libz.wicket
 
 	// jetty
 	compile "org.eclipse.jetty:jetty-webapp:"+libz.jetty
 
 	// logging
 	compile	'ch.qos.logback:logback-classic:'+libz.logback,
-	'org.slf4j:log4j-over-slf4j:'+libz.log4j
+		'org.slf4j:log4j-over-slf4j:'+libz.log4j
+
+	// jersey
+	compile 'com.sun.jersey:jersey-core:'+libz.jersey,
+		'com.sun.jersey:jersey-client:'+libz.jersey,
+		'com.sun.jersey:jersey-json:'+libz.jersey
 
 	// test
 	testCompile 'junit:junit:'+libz.junit
