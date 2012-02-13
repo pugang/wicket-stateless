@@ -106,10 +106,11 @@ public class Example4Panel extends Panel {
 				throw new RuntimeException("Failed to retrieve Github commits : HTTP error code : " + response.getStatus());
 			}
 
-			logger.debug("Github status: {}", response.getStatus());
-
 			String json = response.getEntity(String.class);
-			logger.debug("Github response {}", json);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("Github status: {}, response: {}", response.getStatus(), json);
+			}
 
 			return parseJsonResponse(json);
 
@@ -122,15 +123,18 @@ public class Example4Panel extends Panel {
 				_commits = mapper.readValue(json, GitHubCommits.class);
 				return _commits.getCommits();
 			} catch (Exception e) {
-				logger.error("Failed to parse Github json", e);
+				logger.error("Failed to parse Github json.  Defaulting to empty collection.", e);
 			}
 
 			return Collections.emptyList();
 		}
 
 		private String pageUrl() {
-
-			return page <= 0 ? COMMIT_API_URL + 1 + PER_PAGE : COMMIT_API_URL + getPageNumber() + PER_PAGE;
+			String gitCommitUrl = page <= 0 ? COMMIT_API_URL + 1 + PER_PAGE : COMMIT_API_URL + getPageNumber() + PER_PAGE;
+			if (logger.isDebugEnabled()) {
+				logger.debug("git commit url[{}]", gitCommitUrl);
+			}
+			return gitCommitUrl;
 		}
 
 		@Override

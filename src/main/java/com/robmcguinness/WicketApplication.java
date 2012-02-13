@@ -3,6 +3,7 @@ package com.robmcguinness;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.wicket.RuntimeConfigurationType;
+import org.apache.wicket.devutils.inspector.RenderPerformanceListener;
 import org.apache.wicket.devutils.stateless.StatelessChecker;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.filter.JavaScriptFilteredIntoFooterHeaderResponse;
@@ -35,6 +36,7 @@ public class WicketApplication extends WebApplication {
 			getMarkupSettings().setStripWicketTags(true);
 			getDebugSettings().setDevelopmentUtilitiesEnabled(true);
 			getComponentPreOnBeforeRenderListeners().add(new StatelessChecker());
+			getComponentInstantiationListeners().add(new RenderPerformanceListener());
 		}
 
 		getResourceSettings().getStringResourceLoaders().add(new ClassStringResourceLoader(Validation.class));

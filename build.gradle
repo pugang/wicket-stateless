@@ -31,7 +31,7 @@ manifest.mainAttributes(
 repositories {
 
 	maven { url 'http://download.java.net/maven/2/' }
-	maven { url 'https://raw.github.com/robmcguinness/maven-repository/master/snapshots/' } // apache wicket snapshot is very old so using my own custom github maven repo
+	maven { url 'https://github.com/robmcguinness/maven-repository/raw/master/snapshots/' } // apache wicket snapshot is very old so using my own custom github maven repo
 	mavenCentral()
 
 }
@@ -45,7 +45,7 @@ configurations {
 }
 
 libz = [
-	wicket: '6-CUSTOM-SNAPSHOT',
+	wicket: '6.0-CUSTOM-SNAPSHOT',
 	jetty: '7.5.4.v20111024',
 	junit: '4.8.2',
 	logback: '0.9.30',
@@ -55,7 +55,7 @@ libz = [
 
 dependencies {
 	// wicket
-	compile	'org.apache.wicket:wicket-core:'+libz.wicket,
+	compile 'org.apache.wicket:wicket-core:'+libz.wicket,
 		'org.apache.wicket:wicket-devutils:'+libz.wicket
 
 	// jetty
