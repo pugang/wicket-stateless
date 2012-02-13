@@ -38,7 +38,8 @@ a.btn-danger {
 }
 
 .container > footer {
-    margin-bottom: 30px
+    margin-top: 50px;
+    font-size: 40px;
 }
 
 .container > footer a {
