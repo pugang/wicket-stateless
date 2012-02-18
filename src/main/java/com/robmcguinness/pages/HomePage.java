@@ -1,4 +1,4 @@
-package com.robmcguinness;
+package com.robmcguinness.pages;
 
 import org.apache.wicket.devutils.stateless.StatelessComponent;
 import org.apache.wicket.markup.head.CssHeaderItem;

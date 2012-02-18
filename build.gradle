@@ -15,11 +15,11 @@ logging.captureStandardOutput LogLevel.WARN
 
 group = 'com.robmcguinness'
 archivesBaseName = 'wicket-stateless'
-version = '0.0.3-SNAPSHOT'
+version = '0.0.4-SNAPSHOT'
 description ="A sample project that uses Wicket stateless ajax components."
 
 mainClassName = "com.robmcguinness.Start"
-applicationName = "app"
+applicationName = "stateless"
 
 manifest.mainAttributes(
 	"Built-By": System.getProperty("user.name"),
@@ -35,6 +35,13 @@ repositories {
 	mavenCentral()
 
 }
+
+/*
+configurations.all {
+	// check for updates every build
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // check for update on every build
+}
+*/
 
 // never include this modules in build
 configurations {
@@ -54,9 +61,15 @@ libz = [
 ]
 
 dependencies {
+
 	// wicket
-	compile 'org.apache.wicket:wicket-core:'+libz.wicket,
-		'org.apache.wicket:wicket-devutils:'+libz.wicket
+	compile group: "org.apache.wicket", name: "wicket-core", version: libz.wicket, changing: true
+	compile group: "org.apache.wicket", name: "wicket-devutils", version: libz.wicket, changing: true
+
+	/*
+	compile	'org.apache.wicket:wicket-core:'+libz.wicket,
+	'org.apache.wicket:wicket-devutils:'+libz.wicket
+	*/
 
 	// jetty
 	compile "org.eclipse.jetty:jetty-webapp:"+libz.jetty

@@ -7,13 +7,18 @@ import org.apache.wicket.devutils.stateless.StatelessChecker;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.filter.JavaScriptFilteredIntoFooterHeaderResponse;
 import org.apache.wicket.markup.html.IHeaderResponseDecorator;
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
 import org.apache.wicket.protocol.http.servlet.ServletWebResponse;
+import org.apache.wicket.request.IRequestHandler;
+import org.apache.wicket.request.cycle.AbstractRequestCycleListener;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.http.WebRequest;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.resource.loader.ClassStringResourceLoader;
 
+import com.robmcguinness.pages.HomePage;
 import com.robmcguinness.stateless.utils.Validation;
 
 /**
@@ -22,9 +27,9 @@ import com.robmcguinness.stateless.utils.Validation;
  * @see com.StartTest.stateless.Start#main(String[])
  * 
  */
-public class WicketApplication extends WebApplication {
+public class StatelessWebApplication extends WebApplication {
 	@Override
-	public Class<HomePage> getHomePage() {
+	public Class<? extends WebPage> getHomePage() {
 		return HomePage.class;
 	}
 
@@ -45,6 +50,13 @@ public class WicketApplication extends WebApplication {
 			@Override
 			public IHeaderResponse decorate(IHeaderResponse response) {
 				return new JavaScriptFilteredIntoFooterHeaderResponse(response, "footerBucket");
+			}
+		});
+
+		getRequestCycleListeners().add(new AbstractRequestCycleListener() {
+			@Override
+			public IRequestHandler onException(RequestCycle cycle, Exception ex) {
+				return super.onException(cycle, ex);
 			}
 		});
 
