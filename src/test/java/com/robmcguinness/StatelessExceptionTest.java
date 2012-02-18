@@ -14,7 +14,7 @@ public class StatelessExceptionTest extends BaseWicketTester {
 
 	@Test
 	public void shouldThrowApplicationInStatefulModeWhenExceptionOccurs() {
-		tester.startPage(ExceptionPage.class);
+		tester.startPage(ExampleExceptionPage.class);
 		tester.getApplication().getExceptionSettings().setUnexpectedExceptionDisplay(IExceptionSettings.SHOW_EXCEPTION_PAGE);
 		tester.setExposeExceptions(false);
 
@@ -27,7 +27,7 @@ public class StatelessExceptionTest extends BaseWicketTester {
 
 	@Test
 	public void shouldRemainStatelessWhenExceptionOccurs() {
-		tester.startPage(ExceptionPage.class);
+		tester.startPage(ExampleExceptionPage.class);
 
 		tester.getApplication().getExceptionSettings().setUnexpectedExceptionDisplay(IExceptionSettings.SHOW_INTERNAL_ERROR_PAGE);
 		tester.setExposeExceptions(false);

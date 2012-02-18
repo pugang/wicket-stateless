@@ -10,13 +10,13 @@ import org.apache.wicket.util.resource.StringResourceStream;
 
 import com.robmcguinness.stateless.StatelessAjaxFallbackLink;
 
-public class ExceptionPage extends WebPage {
+public class ExampleExceptionPage extends WebPage {
 
 	private static final String HTML = "<html><head><title>testing excpetions</title></head><body><a wicket:id=\"link\">Throw Exception</a></body></html>";
 
 	private boolean clicked = false;
 
-	public ExceptionPage() {
+	public ExampleExceptionPage() {
 
 		add(new StatelessAjaxFallbackLink<String>("link") {
 			private static final long serialVersionUID = 1L;

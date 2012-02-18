@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class StatelessExceptionPage extends BasePage {
-	public StatelessExceptionPage(PageParameters params) {
+public class ExceptionPage extends BasePage {
+	public ExceptionPage(PageParameters params) {
 		super(params);
 	}
 

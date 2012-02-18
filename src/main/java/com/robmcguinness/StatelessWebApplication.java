@@ -18,7 +18,7 @@ import org.apache.wicket.settings.IExceptionSettings;
 
 import com.robmcguinness.pages.HomePage;
 import com.robmcguinness.pages.NotFoundPage;
-import com.robmcguinness.pages.StatelessExceptionPage;
+import com.robmcguinness.pages.ExceptionPage;
 import com.robmcguinness.stateless.utils.Validation;
 
 /**
@@ -44,7 +44,7 @@ public class StatelessWebApplication extends WebApplication {
 	}
 
 	protected void initMountPage() {
-		mountPage("/500", StatelessExceptionPage.class);
+		mountPage("/500", ExceptionPage.class);
 		mountPage("/404", NotFoundPage.class);
 	}
 
@@ -58,7 +58,7 @@ public class StatelessWebApplication extends WebApplication {
 
 	protected void initExceptionSettings() {
 		getExceptionSettings().setUnexpectedExceptionDisplay(IExceptionSettings.SHOW_INTERNAL_ERROR_PAGE);
-		getApplicationSettings().setInternalErrorPage(StatelessExceptionPage.class);
+		getApplicationSettings().setInternalErrorPage(ExceptionPage.class);
 	}
 
 	protected void initResources() {
