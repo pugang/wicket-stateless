@@ -11,14 +11,13 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
 import org.apache.wicket.protocol.http.servlet.ServletWebResponse;
-import org.apache.wicket.request.IRequestHandler;
-import org.apache.wicket.request.cycle.AbstractRequestCycleListener;
-import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.http.WebRequest;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.resource.loader.ClassStringResourceLoader;
+import org.apache.wicket.settings.IExceptionSettings;
 
 import com.robmcguinness.pages.HomePage;
+import com.robmcguinness.pages.StatelessExceptionPage;
 import com.robmcguinness.stateless.utils.Validation;
 
 /**
@@ -36,13 +35,26 @@ public class StatelessWebApplication extends WebApplication {
 	@Override
 	protected void init() {
 
+		initDebugSettings();
+		initExceptionSettings();
+		initResources();
+
+	}
+
+	protected void initDebugSettings() {
 		if (isDevelopment()) {
 			getMarkupSettings().setStripWicketTags(true);
 			getDebugSettings().setDevelopmentUtilitiesEnabled(true);
 			getComponentPreOnBeforeRenderListeners().add(new StatelessChecker());
-			// getComponentInstantiationListeners().add(new RenderPerformanceListener());
 		}
+	}
 
+	protected void initExceptionSettings() {
+		getExceptionSettings().setUnexpectedExceptionDisplay(IExceptionSettings.SHOW_INTERNAL_ERROR_PAGE);
+		getApplicationSettings().setInternalErrorPage(StatelessExceptionPage.class);
+	}
+
+	protected void initResources() {
 		getResourceSettings().getStringResourceLoaders().add(new ClassStringResourceLoader(Validation.class));
 
 		setHeaderResponseDecorator(new IHeaderResponseDecorator() {
@@ -52,18 +64,10 @@ public class StatelessWebApplication extends WebApplication {
 				return new JavaScriptFilteredIntoFooterHeaderResponse(response, "footerBucket");
 			}
 		});
-
-		getRequestCycleListeners().add(new AbstractRequestCycleListener() {
-			@Override
-			public IRequestHandler onException(RequestCycle cycle, Exception ex) {
-				return super.onException(cycle, ex);
-			}
-		});
-
 	}
 
 	/**
-	 * Don't append <code>jsessionid</code> since state is managed in the url
+	 * Don't append <code>jsessionid</code> since application should be in stateless mode and not require a session
 	 */
 	@Override
 	protected WebResponse newWebResponse(final WebRequest webRequest, HttpServletResponse httpServletResponse) {

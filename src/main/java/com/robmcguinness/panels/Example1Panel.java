@@ -88,8 +88,7 @@ public class Example1Panel extends Panel {
 	}
 
 	/**
-	 * Initializes counter value from request parameters (if applicable) and
-	 * creates a subset of these parameters for use with the components on this
+	 * Initializes counter value from request parameters (if applicable) and creates a subset of these parameters for use with the components on this
 	 * page.
 	 */
 	private PageParameters init() {
