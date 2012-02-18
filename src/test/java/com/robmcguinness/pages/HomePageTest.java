@@ -1,10 +1,11 @@
-package com.robmcguinness;
+package com.robmcguinness.pages;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import com.robmcguinness.pages.HomePage;
+import com.robmcguinness.utils.BaseWicketTester;
 
 /**
  * Simple test using the WicketTester

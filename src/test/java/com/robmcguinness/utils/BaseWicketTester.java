@@ -1,4 +1,4 @@
-package com.robmcguinness;
+package com.robmcguinness.utils;
 
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.markup.html.WebPage;
@@ -13,6 +13,8 @@ import org.junit.rules.TestWatchman;
 import org.junit.runners.model.FrameworkMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.robmcguinness.StatelessWebApplication;
 
 public class BaseWicketTester {
 

@@ -8,7 +8,9 @@ import org.apache.wicket.Page;
 import org.apache.wicket.settings.IExceptionSettings;
 import org.junit.Test;
 
+import com.robmcguinness.pages.ExampleExceptionPage;
 import com.robmcguinness.stateless.StatelessAjaxFallbackLink;
+import com.robmcguinness.utils.BaseWicketTester;
 
 public class StatelessExceptionTest extends BaseWicketTester {
 

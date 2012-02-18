@@ -1,4 +1,4 @@
-package com.robmcguinness;
+package com.robmcguinness.pages;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ContainerInfo;
