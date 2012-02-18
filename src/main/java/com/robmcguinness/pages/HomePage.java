@@ -2,6 +2,7 @@ package com.robmcguinness.pages;
 
 import org.apache.wicket.devutils.stateless.StatelessComponent;
 import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
+import org.apache.wicket.request.http.flow.AbortWithHttpErrorCodeException;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.robmcguinness.panels.Example1Panel;
@@ -45,7 +46,7 @@ public class HomePage extends BasePage {
 			public void onClick() {
 				if (!clicked) {
 					clicked = true;
-					throw new RuntimeException("throw an excpetion and remain stateless");
+					throw new AbortWithHttpErrorCodeException(500, "throw an excpetion and remain stateless");
 				}
 			}
 		});

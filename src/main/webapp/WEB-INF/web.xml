@@ -5,15 +5,10 @@
 
 	<display-name>wicket-header</display-name>
 
-	<!--
-		There are three means to configure Wickets configuration mode and they
-		are tested in the order given.
-
-		1) A system property: -Dwicket.configuration
-		2) servlet specific <init-param>
-		3) context specific <context-param>
-
-		The value might be either "development" (reloading when templates change) or
+	<!-- There are three means to configure Wickets configuration mode and they
+		are tested in the order given. 1) A system property: -Dwicket.configuration
+		2) servlet specific <init-param> 3) context specific <context-param> The
+		value might be either "development" (reloading when templates change) or
 		"deployment". If no configuration is found, "development" is the default. -->
 
 	<filter>
@@ -35,6 +30,15 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404</location>
+	</error-page>
 
 	<session-config>
 		<session-timeout>1</session-timeout>

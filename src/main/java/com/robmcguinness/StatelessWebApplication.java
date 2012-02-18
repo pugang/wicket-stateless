@@ -17,6 +17,7 @@ import org.apache.wicket.resource.loader.ClassStringResourceLoader;
 import org.apache.wicket.settings.IExceptionSettings;
 
 import com.robmcguinness.pages.HomePage;
+import com.robmcguinness.pages.NotFoundPage;
 import com.robmcguinness.pages.StatelessExceptionPage;
 import com.robmcguinness.stateless.utils.Validation;
 
@@ -38,7 +39,13 @@ public class StatelessWebApplication extends WebApplication {
 		initDebugSettings();
 		initExceptionSettings();
 		initResources();
+		initMountPage();
 
+	}
+
+	protected void initMountPage() {
+		mountPage("/500", StatelessExceptionPage.class);
+		mountPage("/404", NotFoundPage.class);
 	}
 
 	protected void initDebugSettings() {

@@ -33,14 +33,14 @@
 
     <div class="content">
       <div class="row">
-        <div class="span6">
-          <p>Clicking button below will bind a session and the stateless indicator in the uppor right will change accordingly.  The session timeout is set for 1 minute.</p>
+        <div class="span4 offset2">
+          <p>Bind a session with a timeout set to 1 minute. Session indicator above should change to 'stateful' when session is bound.</p>
           <p>
             <a class="btn btn-danger" wicket:id="createSessionLink">Session</a>
           </p>
         </div>
-        <div class="span6">
-          <p>Clicking the button below should trigger and exception and display an error page.  The application should remain stateless and the application should redirect to the error page with proper header status set.</p>
+        <div class="span4">
+          <p>When an exception occurs the application should remain stateless and route the user to the appropriate error page.</p>
           <p>
             <a class="btn btn-danger" wicket:id="throwExceptionLink">Exception</a>
           </p>
