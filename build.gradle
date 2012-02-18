@@ -57,8 +57,7 @@ libz = [
 	junit: '4.8.2',
 	logback: '0.9.30',
 	log4j: '1.6.4',
-	jersey: '1.11',
-	nu: '1.2.1'
+	jersey: '1.11'
 ]
 
 dependencies {
@@ -85,8 +84,7 @@ dependencies {
 		'com.sun.jersey:jersey-json:'+libz.jersey
 
 	// test
-	testCompile 'junit:junit:'+libz.junit,
-		'nu.validator.htmlparser:htmlparser:'+libz.nu
+	testCompile 'junit:junit:'+libz.junit
 }
 
 task stage(dependsOn: ['clean', 'installApp'])
