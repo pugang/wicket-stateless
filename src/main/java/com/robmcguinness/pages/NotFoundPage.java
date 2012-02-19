@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class NotFoundPage extends BasePage {
+public class NotFoundPage extends BaseTemplatePage {
 	public NotFoundPage(PageParameters params) {
 		super(params);
 	}

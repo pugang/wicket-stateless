@@ -1,36 +1,5 @@
-<!DOCTYPE html>
- <!--
-            _                                  _
-           | |                                (_)
-  _ __ ___ | |__    _ __ ___   ___  __ _ _   _ _ _ __  _ __   ___ ___ ___
- | '__/ _ \| '_ \  | '_ ` _ \ / __|/ _` | | | | | '_ \| '_ \ / _ | __/ __|
- | | | (_) | |_) | | | | | | | (__| (_| | |_| | | | | | | | |  __|__ \__ \
- |_|  \___/|_.__/  |_| |_| |_|\___|\__, |\__,_|_|_| |_|_| |_|\___|___/___/
-                                    __/ |
-                                   |___/
--->
-<html lang="en" xmlns:wicket>
-<head>
-  <meta charset="utf-8">
-  <title>Wicket Stateless Ajax</title>
-  <meta name="description" content="examples of stateles ajax components based on work by jolira">
-  <meta name="author" content="@robmcguinness">
-  <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
-<body>
-  <header>
-    <span wicket:id="topBar">[header goes here]</span>
-  </header>
-  <div class="container">
-
-    <div class="page-header">
-      <h1>Stateless Ajax Examples</h1>
-    </div>
-
+<wicket:extend xmlns:wicket>
     <span wicket:id="example1">[example 1]</span>
-
     <div class="content">
       <div class="row">
         <div class="span4 offset2">
@@ -46,19 +15,9 @@
           </p>
         </div>
       </div>
-
       <span wicket:id="example2">[example 2]</span>
       <span wicket:id="example3">[example 3]</span>
       <span wicket:id="example4">[example 4]</span>
 
     </div>
-
-    <hr>
-    <footer>
-      <a href="https://twitter.com/#!/robmcguinness">@robmcguinness</a>
-    </footer>
-  </div>
-
-  <div wicket:id="footerBucket"></div>
-</body>
-</html>
+</wicket:extend>

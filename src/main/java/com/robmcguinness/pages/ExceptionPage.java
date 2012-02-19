@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class ExceptionPage extends BasePage {
+public class ExceptionPage extends BaseTemplatePage {
 	public ExceptionPage(PageParameters params) {
 		super(params);
 	}

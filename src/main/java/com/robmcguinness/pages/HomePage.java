@@ -1,7 +1,6 @@
 package com.robmcguinness.pages;
 
 import org.apache.wicket.devutils.stateless.StatelessComponent;
-import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
 import org.apache.wicket.request.http.flow.AbortWithHttpErrorCodeException;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
@@ -9,11 +8,10 @@ import com.robmcguinness.panels.Example1Panel;
 import com.robmcguinness.panels.Example2Panel;
 import com.robmcguinness.panels.Example3Panel;
 import com.robmcguinness.panels.Example4Panel;
-import com.robmcguinness.panels.HeaderPanel;
 import com.robmcguinness.stateless.StatelessLink;
 
 @StatelessComponent
-public class HomePage extends BasePage {
+public class HomePage extends BaseTemplatePage {
 
 	boolean clicked = false;
 
@@ -26,7 +24,6 @@ public class HomePage extends BasePage {
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
 
-		add(new HeaderPanel("topBar").setRenderBodyOnly(true));
 		add(new Example1Panel("example1").setRenderBodyOnly(true));
 		add(new Example2Panel("example2").setRenderBodyOnly(true));
 		add(new Example3Panel("example3").setRenderBodyOnly(true));
@@ -50,8 +47,6 @@ public class HomePage extends BasePage {
 				}
 			}
 		});
-
-		add(new HeaderResponseContainer("footerBucket", "footerBucket"));
 
 	}
 
