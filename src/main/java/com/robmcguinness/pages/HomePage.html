@@ -2,16 +2,22 @@
     <span wicket:id="example1">[example 1]</span>
     <div class="content">
       <div class="row">
-        <div class="span4 offset2">
-          <p>Bind a session with a timeout set to 1 minute. Session indicator above should change to 'stateful' when session is bound.</p>
+        <div class="span4">
+          <p>Bind this session with a timeout set to 1 minute. Session indicator above should change to 'stateful' when session is bound.</p>
           <p>
-            <a class="btn btn-danger" wicket:id="createSessionLink">Session</a>
+            <a class="btn" wicket:id="createSessionLink">Session</a>
           </p>
         </div>
         <div class="span4">
           <p>When an exception occurs the application should remain stateless and route the user to the appropriate error page.</p>
           <p>
-            <a class="btn btn-danger" wicket:id="throwExceptionLink">Exception</a>
+            <a class="btn" wicket:id="throwExceptionLink">Exception</a>
+          </p>
+        </div>
+        <div class="span4">
+          <p>When Wicket can't resolve a url the application should remain stateless and route the user to the not found page.</p>
+          <p>
+            <a class="btn" wicket:id="notFoundLink">Not Found</a>
           </p>
         </div>
       </div>

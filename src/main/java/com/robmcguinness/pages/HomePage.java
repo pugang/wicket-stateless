@@ -48,6 +48,17 @@ public class HomePage extends BaseTemplatePage {
 			}
 		});
 
+		add(new StatelessLink<Void>("notFoundLink") {
+
+			@Override
+			public void onClick() {
+				if (!clicked) {
+					clicked = true;
+					throw new AbortWithHttpErrorCodeException(404, "page is not found");
+				}
+			}
+		});
+
 	}
 
 }
